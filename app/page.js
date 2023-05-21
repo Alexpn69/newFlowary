@@ -1,5 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
+import styles from './page.module.scss';
 
 export default function Home() {
-  return <Link href="./newPage">New Page</Link>;
+  return (
+    <>
+      <Link href="./Overview" className={styles.links}>
+        <span>Start</span>
+      </Link>
+    </>
+  );
 }
