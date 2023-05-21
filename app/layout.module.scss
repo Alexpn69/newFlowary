@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: #081a51;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #f8f9ff;
+}
+.header {
+  height: 75px;
+  border-bottom: 1px solid #dadada;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.lending {
+  background-color: #081a51;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
