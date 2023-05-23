@@ -1,3 +1,11 @@
-.wrap {
-  margin-right: 25px;
+.logo {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > h1 {
+    font-weight: 400;
+    font-size: 24px;
+    color: #ffffff;
+  }
 }

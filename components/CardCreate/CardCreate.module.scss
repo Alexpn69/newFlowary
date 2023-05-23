@@ -1,0 +1,48 @@
+.create {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 15px;
+    .tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      > span {
+        background-color: #09142a;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+      }
+    }
+    > .active {
+      color: #09142a7b;
+      > span {
+        background-color: #09142a7d;
+      }
+    }
+  }
+  .content {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  > .active {
+    display: flex;
+  }
+}

@@ -1,0 +1,49 @@
+.modal {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0);
+  &.active {
+    display: flex;
+    background-color: #09142a10;
+    display: flex;
+    pointer-events: all;
+  }
+}
+.modal__content {
+  background-color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  width: 554px;
+  height: 352px;
+  position: relative;
+  top: 100px;
+  opacity: 0;
+  animation-name: slideIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes slideIn {
+  0% {
+    top: 100px; /* Начальное положение элемента внизу */
+    opacity: 0; /* Начальная непрозрачность элемента */
+  }
+  100% {
+    top: 0; /* Конечное положение элемента вверху */
+    opacity: 1; /* Полная непрозрачность элемента */
+  }
+}
