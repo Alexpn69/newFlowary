@@ -1,6 +1,10 @@
 export * from './TheHeader/TheHeader';
 export * from './TheSidebar/TheSidebar';
 export * from './Button/Button';
+export * from './LendingCard/LendingCard';
+export * from './Modal/Modal';
+export * from './CardForm/CardForm';
+export * from './CardCreate/CardCreate';
 export { default as Github } from './Svg/sidebar/github.svg';
 export { default as History } from './Svg/sidebar/history.svg';
 export { default as Internal } from './Svg/sidebar/internal.svg';

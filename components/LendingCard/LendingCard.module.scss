@@ -1,0 +1,70 @@
+.card {
+  background-color: #ffffff;
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -3px 4px 5px rgba(9, 17, 66, 0.23);
+  height: 275px;
+  position: relative;
+  top: 125px;
+  opacity: 0;
+  animation-name: slideIn;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  .nav {
+    display: flex;
+    .btn {
+      transition: background-color 0.1s ease;
+      font-weight: 400;
+      font-size: 18px;
+      background-color: #09142a;
+      color: #ffffff;
+      width: 195px;
+      height: 71px;
+    }
+    > .active {
+      background-color: #ffffff;
+      font-weight: 700;
+      color: #09142a;
+    }
+  }
+  .content {
+    display: none;
+    .demo {
+      font-weight: 400;
+      font-size: 20px;
+      color: #09142a;
+      border-radius: 13px;
+      box-shadow: 0px 5px 10px rgba(9, 17, 66, 0.1);
+      transition: all 0.3s ease 0s;
+      &:hover {
+        background-color: #09142a;
+        box-shadow: 0px 10px 15px rgba(9, 17, 66, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+      &:active {
+        box-shadow: none;
+        transform: translateY(-1px);
+      }
+    }
+  }
+  > .active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    transition: opacity 0.3s ease;
+  }
+}
+@keyframes slideIn {
+  0% {
+    top: 125px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
