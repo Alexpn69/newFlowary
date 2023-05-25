@@ -1,24 +1,27 @@
-'use client';
-import clsx from 'clsx';
-import './globals.scss';
+"use client";
+import clsx from "clsx";
+import "./globals.scss";
 
-import styles from './layout.module.scss';
-import { TheSidebar, TheHeader } from '@/components';
-import { usePathname } from 'next/navigation';
+import styles from "./layout.module.scss";
+import { TheSidebar, TheHeader } from "@/components";
+import { usePathname } from "next/navigation";
 
-import '@rainbow-me/rainbowkit/styles.css';
+import "@rainbow-me/rainbowkit/styles.css";
 import {
   getDefaultWallets,
   RainbowKitProvider,
   lightTheme,
-} from '@rainbow-me/rainbowkit';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+} from "@rainbow-me/rainbowkit";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "@/store";
 
 const metadata = {
-  title: 'Flowary',
-  description: 'best dapp ever',
+  title: "Flowary",
+  description: "best dapp ever",
 };
 
 const { chains, publicClient } = configureChains(
@@ -27,8 +30,8 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'flowary',
-  projectId: '3c62f87484ed687c3432d402676bccb5',
+  appName: "flowary",
+  projectId: "3c62f87484ed687c3432d402676bccb5",
   chains,
 });
 
@@ -43,39 +46,45 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider
-            chains={chains}
-            theme={lightTheme({
-              accentColor: '#09142a;',
-              accentColorForeground: 'white',
-              borderRadius: 'medium',
-              fontStack: 'system',
-            })}
-          >
-            <div className={styles.container}>
-              {pathname !== '/' && <TheSidebar className={styles.sidebar} />}
-              <div
-                className={clsx(
-                  pathname !== '/' ? styles.wrapper : styles.lendwrapper
-                )}
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <WagmiConfig config={wagmiConfig}>
+              <RainbowKitProvider
+                chains={chains}
+                theme={lightTheme({
+                  accentColor: "#09142a;",
+                  accentColorForeground: "white",
+                  borderRadius: "medium",
+                  fontStack: "system",
+                })}
               >
-                <TheHeader
-                  className={clsx(
-                    pathname !== '/' ? styles.header : styles.lendheader
+                <div className={styles.container}>
+                  {pathname !== "/" && (
+                    <TheSidebar className={styles.sidebar} />
                   )}
-                />
-                <main
-                  className={clsx(
-                    pathname !== '/' ? styles.main : styles.lendmain
-                  )}
-                >
-                  {children}
-                </main>
-              </div>
-            </div>
-          </RainbowKitProvider>
-        </WagmiConfig>
+                  <div
+                    className={clsx(
+                      pathname !== "/" ? styles.wrapper : styles.lendwrapper
+                    )}
+                  >
+                    <TheHeader
+                      className={clsx(
+                        pathname !== "/" ? styles.header : styles.lendheader
+                      )}
+                    />
+                    <main
+                      className={clsx(
+                        pathname !== "/" ? styles.main : styles.lendmain
+                      )}
+                    >
+                      {children}
+                    </main>
+                  </div>
+                </div>
+              </RainbowKitProvider>
+            </WagmiConfig>
+          </PersistGate>
+        </Provider>
       </body>
     </html>
   );

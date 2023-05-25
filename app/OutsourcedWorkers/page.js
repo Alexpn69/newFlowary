@@ -1,6 +1,5 @@
-import Link from 'next/link';
-import styles from './page.module.scss';
+import styles from "./page.module.scss";
 
-export default function outsourcedworkers() {
+export default function Outsourcedworkers() {
   return <p>OutsourcedWorkers</p>;
 }

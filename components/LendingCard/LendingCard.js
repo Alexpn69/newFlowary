@@ -1,30 +1,43 @@
-'use client';
-import Link from 'next/link';
-import styles from './LendingCard.module.scss';
-import { Button, CardForm, CardCreate } from '@/components';
-import clsx from 'clsx';
+"use client";
+import styles from "./LendingCard.module.scss";
+import { Button, CardForm, CardCreate } from "@/components";
+import clsx from "clsx";
+import { useConnectDemo } from "@/logic/hooks/useConnectDemo";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useConnectCompany } from "@/logic/hooks/useConnectCompany";
 
 export const LendingCard = ({ activeTab, setActiveTab }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { isLoading, handleConnectDemo } = useConnectDemo();
+  const { loading, text, handleConnectCompany } = useConnectCompany();
+  const handleCompany = (companyName) => {
+    handleConnectCompany(companyName, dispatch, router);
+  };
+  const handleDemo = () => {
+    handleConnectDemo(dispatch, router);
+  };
   return (
     <div className={styles.card}>
       <div className={styles.nav}>
         <Button
-          className={clsx(styles.btn, activeTab === 'create' && styles.active)}
-          onClick={() => setActiveTab('create')}
-          style={{ borderRadius: '26px 0 0 0' }}
+          className={clsx(styles.btn, activeTab === "create" && styles.active)}
+          onClick={() => setActiveTab("create")}
+          style={{ borderRadius: "26px 0 0 0" }}
         >
           Create
         </Button>
         <Button
-          className={clsx(styles.btn, activeTab === 'exist' && styles.active)}
-          onClick={() => setActiveTab('exist')}
+          className={clsx(styles.btn, activeTab === "exist" && styles.active)}
+          onClick={() => setActiveTab("exist")}
         >
           Exist
         </Button>
         <Button
-          className={clsx(styles.btn, activeTab === 'demo' && styles.active)}
-          onClick={() => setActiveTab('demo')}
-          style={{ borderRadius: '0 26px 0 0' }}
+          className={clsx(styles.btn, activeTab === "demo" && styles.active)}
+          onClick={() => setActiveTab("demo")}
+          style={{ borderRadius: "0 26px 0 0" }}
         >
           Demo
         </Button>
@@ -32,20 +45,27 @@ export const LendingCard = ({ activeTab, setActiveTab }) => {
       <div
         className={clsx(
           styles.content,
-          activeTab === 'create' && styles.active
+          activeTab === "create" && styles.active
         )}
       >
         <CardCreate />
       </div>
       <div
-        className={clsx(styles.content, activeTab === 'exist' && styles.active)}
+        className={clsx(styles.content, activeTab === "exist" && styles.active)}
       >
-        <CardForm />
+        {loading ? <p>Loading...</p> : <CardForm handler={handleCompany} />}
+        {text && <p>{text}</p>}{" "}
       </div>
       <div
-        className={clsx(styles.content, activeTab === 'demo' && styles.active)}
+        className={clsx(styles.content, activeTab === "demo" && styles.active)}
       >
-        <Button className={styles.demo}>Start Demo Version</Button>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Button className={styles.demo} onClick={handleDemo}>
+            Start Demo Version
+          </Button>
+        )}
       </div>
     </div>
   );

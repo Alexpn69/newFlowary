@@ -1,13 +1,13 @@
-const path = require('path');
+const path = require("path");
 
 const nextConfig = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
   },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: ["@svgr/webpack"],
     });
     config.resolve.fallback = {
       fs: false,
@@ -17,6 +17,7 @@ const nextConfig = {
 
     return config;
   },
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;
