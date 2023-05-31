@@ -1,6 +1,6 @@
 import { setAddress } from "@/store/reducers/contract/reducer";
 import postRecord from "../serverFunc/postRecord";
-import getContractSigner from "../hooks/usePrepareContract";
+import getContractSigner from "./getSignedContract";
 import { FACTORY_ABI, FACTORY_ADDRESS } from "@/web3/contractFactory";
 import getRecordByName from "../serverFunc/getRecordByName";
 
@@ -8,11 +8,11 @@ const handleCreateCompany = async (
   name,
   setExistedName,
   dispatch,
-  setLoading,
+  setIsLoading,
   setActiveTab
 ) => {
   try {
-    const contractSigner = await getContractSigner(
+    const { contractSigner } = await getContractSigner(
       FACTORY_ABI,
       FACTORY_ADDRESS
     );
@@ -24,12 +24,12 @@ const handleCreateCompany = async (
         ),
         setTimeout(() => setExistedName(""), 3000)
       );
-    } else setLoading(true);
+    } else setIsLoading(true);
     const tx = await contractSigner.createCompany(name);
     const response = await tx.wait();
     await postRecord(name, response.logs[0].address);
     dispatch(setAddress(response.logs[0].address));
-    setLoading(false);
+    setIsLoading(false);
     setActiveTab("Set Token");
   } catch (error) {
     console.log(error);

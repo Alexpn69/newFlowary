@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { contractSelector, setAdmin } from "@/store/reducers/contract/reducer";
-import { useSelector } from "react-redux";
-import getContractSigner from "./usePrepareContract";
-import { CONTRACT_INSTANCE_ABI } from "@/web3/contractInstanceAbi";
+import { useDispatch, useSelector } from "react-redux";
 import connectContract from "../functions/connectContract";
+import { useRouter } from "next/navigation";
+import usePrepareCompanyContract from "./usePrepareCompanyContract";
 
 const useSetAdmin = () => {
   const [loadingAdmin, setLoading] = useState(false);
   const { address } = useSelector(contractSelector);
-  const handleSetAdmin = async (adminAddress, dispatch, router) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { signedCompanyContract } = usePrepareCompanyContract();
+
+  const handleSetAdmin = async (adminAddress) => {
     try {
-      const contractSigner = await getContractSigner(
-        CONTRACT_INSTANCE_ABI,
-        address
-      );
       setLoading(true);
-      const tx = await contractSigner.changeAdmin(adminAddress);
+      const tx = await signedCompanyContract.changeAdmin(adminAddress);
       await tx.wait();
       dispatch(setAdmin(adminAddress));
       await connectContract(address, dispatch);

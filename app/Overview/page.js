@@ -8,10 +8,10 @@ import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 export default function Overview() {
   const { address, arrOutsource, arrEmployee, symbolToken } =
     useSelector(contractSelector);
-  const sumOfOutsource =
-    arrOutsource.reduce((acc, obj) => acc + Number(obj.wage), 0) || 0;
   const { arrayBlock } = useGetAllLogs();
+
   const totalValueStreams = sumValuesByKey(arrayBlock, "earned");
+  const totalValueOutsource = sumValuesByKey(arrOutsource, "wage");
 
   return (
     <div>
@@ -19,13 +19,14 @@ export default function Overview() {
       <br />
       <div>address contracta companii {address}</div> <br />
       <div>kolichestvo sotrudnikov {arrEmployee.length}</div> <br />
-      <div>summa vseh zavershennyh strimov {arrEmployee.length}</div> <br />
       <div>
-        summa vseh outsource {totalValueStreams} {symbolToken}
-      </div>
+        summa vseh zavershennyh strimov {Math.floor(totalValueStreams)}
+        {symbolToken}
+      </div>{" "}
+      <br />
       <div>kolichestvo outsoursr {arrOutsource.length}</div> <br />
       <div>
-        summa vseh outsource {sumOfOutsource}
+        summa vseh outsource {totalValueOutsource}
         {symbolToken}
       </div>{" "}
       <br />

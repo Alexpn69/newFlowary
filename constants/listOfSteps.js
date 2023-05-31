@@ -4,4 +4,3 @@ export const fullSteps = [
   "Set Token",
   "Set Admin",
 ];
-export const cuttenSteps = ["Create Company", "Set Token", "Set Admin"];
