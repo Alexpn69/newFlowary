@@ -1,0 +1,22 @@
+.swiper {
+  max-width: 700px;
+  height: 300px;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  max-width: 700px;
+}
+.swiper-slide {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+.image {
+  height: 100%;
+  object-fit: contain;
+}

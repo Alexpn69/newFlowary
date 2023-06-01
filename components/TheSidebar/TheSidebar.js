@@ -1,9 +1,9 @@
-"use client";
-import Link from "next/link";
-import styles from "./TheSidebar.module.scss";
-import clsx from "clsx";
-import { Button } from "@/components/Button/Button";
-import { usePathname, useRouter } from "next/navigation";
+'use client';
+import Link from 'next/link';
+import styles from './TheSidebar.module.scss';
+import clsx from 'clsx';
+import { Button } from '@/components/Button/Button';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   CardForm,
   Change,
@@ -15,10 +15,10 @@ import {
   Outsource,
   Overview,
   Settings,
-} from "@/components";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useConnectCompany } from "@/logic/hooks/useConnectCompany";
+} from '@/components';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useConnectCompany } from '@/logic/hooks/useConnectCompany';
 
 export const TheSidebar = ({ ...props }) => {
   const [modalActive, setModalActive] = useState(false);
@@ -45,13 +45,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./overview"
             className={clsx(
               styles.link,
-              pathname.startsWith("/overview") && styles.active
+              pathname.startsWith('/overview') && styles.active
             )}
           >
             <Overview
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/overview") && styles.active
+                pathname.startsWith('/overview') && styles.active
               )}
             />
             Overview
@@ -62,13 +62,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./internalstaff"
             className={clsx(
               styles.link,
-              pathname.startsWith("/internalstaff") && styles.active
+              pathname.startsWith('/internalstaff') && styles.active
             )}
           >
             <Internal
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/internalstaff") && styles.active
+                pathname.startsWith('/internalstaff') && styles.active
               )}
             />
             Internal Staff
@@ -79,13 +79,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./outsourcedworkers"
             className={clsx(
               styles.link,
-              pathname.startsWith("/outsourcedworkers") && styles.active
+              pathname.startsWith('/outsourcedworkers') && styles.active
             )}
           >
             <Outsource
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/outsourcedworkers") && styles.active
+                pathname.startsWith('/outsourcedworkers') && styles.active
               )}
             />
             Outsourced Workers
@@ -96,13 +96,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./history"
             className={clsx(
               styles.link,
-              pathname.startsWith("/history") && styles.active
+              pathname.startsWith('/history') && styles.active
             )}
           >
             <History
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/history") && styles.active
+                pathname.startsWith('/history') && styles.active
               )}
             />
             History
@@ -113,13 +113,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./settings"
             className={clsx(
               styles.link,
-              pathname.startsWith("/settings") && styles.active
+              pathname.startsWith('/settings') && styles.active
             )}
           >
             <Settings
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/settings") && styles.active
+                pathname.startsWith('/settings') && styles.active
               )}
             />
             Settings
@@ -161,7 +161,7 @@ export const TheSidebar = ({ ...props }) => {
       </ul>
       <Modal active={modalActive2} setActive={setModalActive2}>
         {loading ? <p>Loading...</p> : <CardForm handler={handleCompany} />}
-        {text && <p>{text}</p>}{" "}
+        {text && <p>{text}</p>}
       </Modal>
       <Modal active={modalActive} setActive={setModalActive}>
         <Link href="/" className={styles.btns}>

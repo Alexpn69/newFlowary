@@ -3,8 +3,8 @@
   border-radius: 26px;
   display: flex;
   flex-direction: column;
-  box-shadow: -3px 4px 5px rgba(9, 17, 66, 0.23);
-  height: 275px;
+  box-shadow: -3px 4px 5px rgba(28, 48, 90, 0.4);
+  height: 300px;
   position: relative;
   top: 125px;
   opacity: 0;
@@ -18,7 +18,7 @@
       transition: background-color 0.1s ease;
       font-weight: 400;
       font-size: 18px;
-      background-color: #09142a;
+      background-color: #1c305a;
       color: #ffffff;
       width: 195px;
       height: 71px;
@@ -26,7 +26,7 @@
     > .active {
       background-color: #ffffff;
       font-weight: 700;
-      color: #09142a;
+      color: #1c305a;
     }
   }
   .content {
@@ -34,13 +34,13 @@
     .demo {
       font-weight: 400;
       font-size: 20px;
-      color: #09142a;
+      color: #1c305a;
       border-radius: 13px;
-      box-shadow: 0px 5px 10px rgba(9, 17, 66, 0.1);
+      box-shadow: 0px 5px 10px rgba(28, 48, 90, 0.1);
       transition: all 0.3s ease 0s;
       &:hover {
-        background-color: #09142a;
-        box-shadow: 0px 10px 15px rgba(9, 17, 66, 0.4);
+        background-color: #1c305a;
+        box-shadow: 0px 10px 15px rgba(28, 48, 90, 0.4);
         color: #fff;
         transform: translateY(-7px);
       }
