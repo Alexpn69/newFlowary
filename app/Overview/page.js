@@ -30,6 +30,10 @@ export default function Overview() {
     arrOutsource.reduce((acc, obj) => acc + Number(obj.wage), 0) || 0;
   const { arrayBlock } = useGetAllLogs();
   const sumOfInternal = sumValuesByKey(arrayBlock, 'earned');
+
+  // const totalValueStreams = sumValuesByKey(arrayBlock, 'earned');
+  // const totalValueOutsource = sumValuesByKey(arrOutsource, 'wage');
+
   return (
     <>
       <div className={styles.left}>

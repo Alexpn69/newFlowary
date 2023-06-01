@@ -2,39 +2,22 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import styles from "./CardCreate.module.scss";
 import clsx from "clsx";
-import { useAccount } from "wagmi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CardForm } from "@/components";
-import { cuttenSteps, fullSteps } from "@/constants/listOfSteps";
 import { useDispatch } from "react-redux";
-import handleCreateCompany from "@/logic/functions/createCompany";
 import useSetToken from "@/logic/hooks/useSetToken";
-import { useRouter } from "next/navigation";
 import useSetAdmin from "@/logic/hooks/useSetAdmin";
+import { fullSteps } from "@/constants/listOfSteps";
+import useCreateCompany from "@/logic/hooks/useCreateCompany";
 
 export const CardCreate = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
-  const [existedName, setExistedName] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { address: walletAddress } = useAccount();
-  const steps = walletAddress ? cuttenSteps : fullSteps;
-  const initialStep = walletAddress ? "Create Company" : "Connect Wallet";
-  const [activeTab, setActiveTab] = useState(initialStep);
-  useEffect(() => {
-    console.log(activeTab);
-    walletAddress && setActiveTab("Create Company");
-  }, [activeTab, walletAddress]);
+  const [activeTab, setActiveTab] = useState("Connect Wallet");
 
+  const { isLoading, existedName, handleCreateCompany } = useCreateCompany();
   const handleCreate = async (name) => {
     try {
-      handleCreateCompany(
-        name,
-        setExistedName,
-        dispatch,
-        setLoading,
-        setActiveTab
-      );
+      handleCreateCompany(name, setActiveTab);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +25,7 @@ export const CardCreate = () => {
   const { handleSetToken, loadingToken } = useSetToken();
   const handleToken = async (name) => {
     try {
-      handleSetToken(name, setActiveTab, dispatch);
+      handleSetToken(name, setActiveTab);
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +33,7 @@ export const CardCreate = () => {
   const { handleSetAdmin, loadingAdmin } = useSetAdmin();
   const handleAdmin = async (name) => {
     try {
-      handleSetAdmin(name, dispatch, router);
+      handleSetAdmin(name);
     } catch (error) {
       console.log(error);
     }
@@ -58,20 +41,17 @@ export const CardCreate = () => {
   return (
     <div className={styles.create}>
       <div className={styles.menu}>
-        {steps.map((step, index) => (
+        {fullSteps.map((step, index) => (
           <div
             key={step}
             className={clsx(styles.tabs, activeTab !== step && styles.active)}
-            onClick={() => {
-              setActiveTab(step);
-            }}
           >
             <span>{index + 1}</span>
             <p>{step}</p>
           </div>
         ))}
       </div>
-      {!walletAddress && (
+      {
         <div
           className={clsx(
             styles.content,
@@ -79,8 +59,11 @@ export const CardCreate = () => {
           )}
         >
           <ConnectButton />
+          <button onClick={() => setActiveTab("Create Company")}>
+            Next step
+          </button>
         </div>
-      )}
+      }
       {activeTab === "Create Company" && (
         <div
           className={clsx(
@@ -88,7 +71,7 @@ export const CardCreate = () => {
             activeTab === "Create Company" && styles.active
           )}
         >
-          {loading ? (
+          {isLoading ? (
             <p>Creating...</p>
           ) : (
             <CardForm
@@ -112,7 +95,7 @@ export const CardCreate = () => {
             )}
           >
             {loadingToken ? (
-              <p>Loading...</p>
+              <p>Setting...</p>
             ) : (
               <CardForm
                 label="Address"
@@ -132,7 +115,7 @@ export const CardCreate = () => {
           )}
         >
           {loadingAdmin ? (
-            <p>Loading...</p>
+            <p>Setting...</p>
           ) : (
             <CardForm
               label="Address"

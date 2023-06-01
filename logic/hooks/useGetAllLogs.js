@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import getContractSigner from "./usePrepareContract";
+import getContractSigner from "../functions/getSignedContract";
 import { CONTRACT_INSTANCE_ABI } from "../../web3/contractInstanceAbi";
 import { useSelector } from "react-redux";
 import { contractSelector } from "@/store/reducers/contract/reducer";
@@ -9,12 +9,11 @@ const useGetAllLogs = () => {
   const [loader, setLoader] = useState(false);
   const [arrayBlock, setArrayBlock] = useState([]);
   const { address, decimalsToken } = useSelector(contractSelector);
-
   useEffect(() => {
     setLoader(true);
     const getAllLogs = async () => {
       try {
-        const contract = await getContractSigner(
+        const { contract } = await getContractSigner(
           CONTRACT_INSTANCE_ABI,
           address
         );
