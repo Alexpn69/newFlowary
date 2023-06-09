@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { contractSelector, setAdmin } from "@/store/reducers/contract/reducer";
-import { useDispatch, useSelector } from "react-redux";
-import connectContract from "../functions/connectContract";
-import { useRouter } from "next/navigation";
-import usePrepareCompanyContract from "./usePrepareCompanyContract";
+import { useState } from 'react';
+import { contractSelector, setAdmin } from '@/store/reducers/contract/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import connectContract from '../functions/connectContract';
+import { useRouter } from 'next/navigation';
+import usePrepareCompanyContract from './usePrepareCompanyContract';
 
 const useSetAdmin = () => {
-  const [loadingAdmin, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [notif, setNotif] = useState('');
   const { address } = useSelector(contractSelector);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -15,19 +16,23 @@ const useSetAdmin = () => {
 
   const handleSetAdmin = async (adminAddress) => {
     try {
-      setLoading(true);
+      setIsLoading(true);
+      setNotif('');
       const tx = await signedCompanyContract.changeAdmin(adminAddress);
       await tx.wait();
       dispatch(setAdmin(adminAddress));
       await connectContract(address, dispatch);
-      router.push("/internalstaff");
+      router.push('/overview');
+      setNotif('Success!');
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+      console.error('An error occurred:', error);
+      setNotif('An error occurred!');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { loadingAdmin, handleSetAdmin };
+  return { handleSetAdmin, isLoading, notif };
 };
 
 export default useSetAdmin;

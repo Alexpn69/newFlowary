@@ -1,11 +1,10 @@
-"use client";
-import Link from "next/link";
-import styles from "./TheSidebar.module.scss";
-import clsx from "clsx";
-import { Button } from "@/components/Button/Button";
-import { usePathname, useRouter } from "next/navigation";
+'use client';
+import Link from 'next/link';
+import styles from './TheSidebar.module.scss';
+import clsx from 'clsx';
+import { usePathname, useRouter } from 'next/navigation';
 import {
-  CardForm,
+  InputForm,
   Change,
   Documentation,
   History,
@@ -15,22 +14,29 @@ import {
   Outsource,
   Overview,
   Settings,
-} from "@/components";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useConnectCompany } from "@/logic/hooks/useConnectCompany";
+  Button,
+  Loader,
+  Notif,
+} from '@/components';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useConnectCompany } from '@/logic/hooks/useConnectCompany';
 
 export const TheSidebar = ({ ...props }) => {
   const [modalActive, setModalActive] = useState(false);
   const [modalActive2, setModalActive2] = useState(false);
+
   const dispatch = useDispatch();
   const router = useRouter();
-  const { loading, text, handleConnectCompany } = useConnectCompany();
-
   const pathname = usePathname();
+
+  const { isLoading, notif, handleConnectCompany } = useConnectCompany();
+
   const handleCompany = async (companyName) => {
-    await handleConnectCompany(companyName, dispatch, router);
-    setModalActive2(false);
+    const result = await handleConnectCompany(companyName, dispatch, router);
+    if (result) {
+      setModalActive2(false);
+    }
   };
 
   return (
@@ -43,16 +49,10 @@ export const TheSidebar = ({ ...props }) => {
         <li>
           <Link
             href="./overview"
-            className={clsx(
-              styles.link,
-              pathname.startsWith("/overview") && styles.active
-            )}
+            className={clsx(styles.link, pathname.startsWith('/overview') && styles.active)}
           >
             <Overview
-              className={clsx(
-                styles.svg,
-                pathname.startsWith("/overview") && styles.active
-              )}
+              className={clsx(styles.svg, pathname.startsWith('/overview') && styles.active)}
             />
             Overview
           </Link>
@@ -60,16 +60,10 @@ export const TheSidebar = ({ ...props }) => {
         <li>
           <Link
             href="./internalstaff"
-            className={clsx(
-              styles.link,
-              pathname.startsWith("/internalstaff") && styles.active
-            )}
+            className={clsx(styles.link, pathname.startsWith('/internalstaff') && styles.active)}
           >
             <Internal
-              className={clsx(
-                styles.svg,
-                pathname.startsWith("/internalstaff") && styles.active
-              )}
+              className={clsx(styles.svg, pathname.startsWith('/internalstaff') && styles.active)}
             />
             Internal Staff
           </Link>
@@ -79,13 +73,13 @@ export const TheSidebar = ({ ...props }) => {
             href="./outsourcedworkers"
             className={clsx(
               styles.link,
-              pathname.startsWith("/outsourcedworkers") && styles.active
+              pathname.startsWith('/outsourcedworkers') && styles.active
             )}
           >
             <Outsource
               className={clsx(
                 styles.svg,
-                pathname.startsWith("/outsourcedworkers") && styles.active
+                pathname.startsWith('/outsourcedworkers') && styles.active
               )}
             />
             Outsourced Workers
@@ -94,16 +88,10 @@ export const TheSidebar = ({ ...props }) => {
         <li>
           <Link
             href="./history"
-            className={clsx(
-              styles.link,
-              pathname.startsWith("/history") && styles.active
-            )}
+            className={clsx(styles.link, pathname.startsWith('/history') && styles.active)}
           >
             <History
-              className={clsx(
-                styles.svg,
-                pathname.startsWith("/history") && styles.active
-              )}
+              className={clsx(styles.svg, pathname.startsWith('/history') && styles.active)}
             />
             History
           </Link>
@@ -111,16 +99,10 @@ export const TheSidebar = ({ ...props }) => {
         <li>
           <Link
             href="./settings"
-            className={clsx(
-              styles.link,
-              pathname.startsWith("/settings") && styles.active
-            )}
+            className={clsx(styles.link, pathname.startsWith('/settings') && styles.active)}
           >
             <Settings
-              className={clsx(
-                styles.svg,
-                pathname.startsWith("/settings") && styles.active
-              )}
+              className={clsx(styles.svg, pathname.startsWith('/settings') && styles.active)}
             />
             Settings
           </Link>
@@ -129,6 +111,7 @@ export const TheSidebar = ({ ...props }) => {
           <Link
             href="https://github.com/Alexpn69/newFlowary.git"
             className={clsx(styles.link)}
+            target="_blank"
           >
             <Documentation className={clsx(styles.svg)} />
             Documentation
@@ -160,14 +143,23 @@ export const TheSidebar = ({ ...props }) => {
         </li>
       </ul>
       <Modal active={modalActive2} setActive={setModalActive2}>
-        {loading ? <p>Loading...</p> : <CardForm handler={handleCompany} />}
-        {text && <p>{text}</p>}{" "}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <InputForm
+            label="Company"
+            placeholder="Enter Company Name"
+            button="Connect"
+            handler={handleCompany}
+          />
+        )}
       </Modal>
       <Modal active={modalActive} setActive={setModalActive}>
         <Link href="/" className={styles.btns}>
           <span>Really Close?</span>
         </Link>
       </Modal>
+      <Notif active={notif}>{notif}</Notif>
     </div>
   );
 };

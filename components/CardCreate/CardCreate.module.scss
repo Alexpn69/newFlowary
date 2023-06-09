@@ -17,8 +17,9 @@
       gap: 8px;
       font-size: 16px;
       cursor: pointer;
+      color: #1c305a;
       > span {
-        background-color: #09142a;
+        background-color: #1c305a;
         color: white;
         border-radius: 50%;
         display: flex;
@@ -30,9 +31,9 @@
       }
     }
     > .active {
-      color: #09142a7b;
+      color: #1c305a5d;
       > span {
-        background-color: #09142a7d;
+        background-color: #1c305a61;
       }
     }
   }

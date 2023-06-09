@@ -1,36 +1,31 @@
-import { useRef, useState } from "react";
-import { ethers } from "ethers";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { ethers } from 'ethers';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   contractSelector,
   setAmountEmployee,
   setArrEmployee,
-} from "@/store/reducers/contract/reducer";
-import usePrepareCompanyContract from "./usePrepareCompanyContract";
+} from '@/store/reducers/contract/reducer';
+import usePrepareCompanyContract from './usePrepareCompanyContract';
 
-const useAddEmployee = (setActive) => {
-  const [isLoading, setIsLoading] = useState(false);
+const useAddEmployee = (setActive, addressUserRef, rateRef) => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [notif, setNotif] = useState('');
   const { decimalsToken } = useSelector(contractSelector);
-  const { contractCompany, signedCompanyContract } =
-    usePrepareCompanyContract();
-  const rateRef = useRef();
-  const addressUserRef = useRef();
+  const { contractCompany, signedCompanyContract } = usePrepareCompanyContract();
 
-  const handleNewUser = async (e) => {
-    e.preventDefault();
+  const handleNewUser = async () => {
     try {
+      setNotif('');
       setIsLoading(true);
       const addUser = await signedCompanyContract.addEmployee(
         addressUserRef.current.value,
         ((rateRef.current.value / 60 / 60) * 10 ** decimalsToken).toFixed(0)
       );
       await addUser.wait();
-
       // Refresh array of employees
-      const amountEmployee = (
-        await contractCompany.amountEmployee()
-      ).toNumber();
+      const amountEmployee = (await contractCompany.amountEmployee()).toNumber();
       dispatch(setAmountEmployee(amountEmployee));
 
       let employeeArr = [];
@@ -48,19 +43,21 @@ const useAddEmployee = (setActive) => {
         employeeArr.push(employee);
       }
       dispatch(setArrEmployee(employeeArr));
+      setNotif('Success!');
+      setActive(false);
     } catch (error) {
-      console.log(error);
+      console.error('An error occurred:', error);
+      setNotif('An error occurred!');
     } finally {
       setIsLoading(false);
-      setActive(false);
     }
   };
 
   return {
-    isLoading,
-    addressUserRef,
-    rateRef,
     handleNewUser,
+    isLoading,
+    notif,
+    setNotif,
   };
 };
 

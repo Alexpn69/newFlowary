@@ -1,5 +1,5 @@
-import { ethers } from "ethers";
-import defaultProvider from "../../web3/defaultProvider";
+import { ethers } from 'ethers';
+import defaultProvider from '../../web3/defaultProvider';
 
 import {
   setArrOutsource,
@@ -7,9 +7,9 @@ import {
   setSymbolToken,
   setContractInfo,
   setAddress,
-} from "../../store/reducers/contract/reducer";
-import { CONTRACT_INSTANCE_ABI } from "@/web3/contractInstanceAbi";
-import { TOKEN_ABI } from "@/web3/tokenAbi";
+} from '../../store/reducers/contract/reducer';
+import { CONTRACT_INSTANCE_ABI } from '@/web3/contractInstanceAbi';
+import { TOKEN_ABI } from '@/web3/tokenAbi';
 
 const connectContract = async (address, dispatch) => {
   if (!address) return;

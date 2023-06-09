@@ -1,0 +1,42 @@
+.swiper {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  height: 240px;
+  border-radius: 6px;
+}
+.swiper-slide {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.image {
+  object-fit: contain;
+}
+.text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 35px 30px;
+  color: #fff;
+  > h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3px;
+  }
+  > p {
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}

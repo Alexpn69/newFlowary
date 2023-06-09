@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   > span {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 24px;
     color: #ffffff;
   }
@@ -12,7 +12,7 @@
 .nav {
   margin-top: 75px;
   li {
-    margin: 0 0 4px 16px;
+    margin: 0 0 4px 20px;
     .link {
       display: flex;
       justify-content: flex-start;
@@ -20,15 +20,14 @@
       gap: 10px;
       font-weight: 500;
       font-size: 16px;
-      line-height: 20px;
       color: #ccd2e3;
-      padding: 15px 25px;
+      padding: 15px 20px;
       border-radius: 4px 0 0 4px;
       .active {
         fill: #ffffff;
       }
       &:hover {
-        background-color: #182641;
+        background-color: #273b69;
         color: white;
         .svg {
           fill: #ffffff;
@@ -36,7 +35,7 @@
       }
     }
     .active {
-      background-color: #182641;
+      background-color: #273b69;
       color: white;
     }
   }
@@ -54,7 +53,7 @@
       color: #ccd2e3;
       border-radius: 4px;
       &:hover {
-        background-color: #182641;
+        background-color: #19294f;
         color: white;
       }
     }
@@ -65,14 +64,14 @@
     font-weight: 500;
     font-size: 24px;
     background-color: #ffffff;
-    color: #09142a;
+    color: #1c305a;
     border-radius: 12px;
     padding: 25px 35px;
-    box-shadow: 0px 5px 10px rgba(9, 17, 66, 0.1);
+    box-shadow: 0px 5px 10px rgba(28, 48, 90, 0.1);
     transition: all 0.3s ease 0s;
     &:hover {
-      background-color: #09142a;
-      box-shadow: 0px 10px 15px rgba(9, 17, 66, 0.4);
+      background-color: #1c305a;
+      box-shadow: 0px 10px 15px rgba(28, 48, 90, 0.4);
       color: #fff;
       transform: translateY(-7px);
     }

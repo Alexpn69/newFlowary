@@ -9,3 +9,58 @@
     color: #ffffff;
   }
 }
+.info {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #152552;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > span {
+    padding: 0 25px;
+    border-left: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+  }
+}
+.wrapper {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  border-radius: 6px;
+  top: 75px;
+  right: 0;
+  transition: 0.3s ease-out;
+  padding: 15px;
+  z-index: 2;
+  > li {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    > p {
+      text-align: left;
+      flex: 1;
+    }
+    > span {
+      font-weight: 600;
+      text-align: center;
+      flex: 2;
+    }
+  }
+  > li:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.wrapper.active {
+  background: #ffffff;
+  visibility: visible;
+  opacity: 1;
+  right: 85px;
+  z-index: 2;
+  transition: 0.3s ease-out;
+}
