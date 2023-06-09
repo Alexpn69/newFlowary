@@ -12,7 +12,7 @@
 .nav {
   margin-top: 75px;
   li {
-    margin: 0 0 4px 25px;
+    margin: 0 0 4px 20px;
     .link {
       display: flex;
       justify-content: flex-start;
@@ -20,9 +20,8 @@
       gap: 10px;
       font-weight: 500;
       font-size: 16px;
-      line-height: 20px;
       color: #ccd2e3;
-      padding: 15px 25px;
+      padding: 15px 20px;
       border-radius: 4px 0 0 4px;
       .active {
         fill: #ffffff;

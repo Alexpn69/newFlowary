@@ -1,13 +1,15 @@
-"use client";
-import styles from "./UserCard.module.scss";
-import { useState } from "react";
-import ModalSettingsUser from "./ModalSettingsUser/ModalSettingsUser";
-import useStartStopStream from "@/logic/hooks/useStartStopStream";
+'use client';
+import styles from './UserCard.module.scss';
+import { useState } from 'react';
+import useStartStopStream from '@/logic/hooks/useStartStopStream';
+import { Button, Loader, Modal, ModalSettingsUser, Notif } from '@/components';
 
-const UserCard = ({ who, rate }) => {
+export const UserCard = ({ who, rate }) => {
   const [active, setActive] = useState(false);
   const {
     isLoading,
+    notif,
+    isLoadingBalance,
     isActive,
     amountOfStream,
     hadleStartStream,
@@ -15,26 +17,24 @@ const UserCard = ({ who, rate }) => {
   } = useStartStopStream(who);
 
   return (
-    <>
+    <ul>
       <h3>User address: {who}</h3>
       <h5>User rate: {rate}</h5>
       {!isActive ? (
-        <button onClick={hadleStartStream}>Start stream</button>
+        <Button onClick={hadleStartStream}>{isLoading ? <Loader /> : 'Start stream'}</Button>
       ) : (
-        <button onClick={hadleStopStream}>Stop stream</button>
+        <Button onClick={hadleStopStream}>{isLoading ? <Loader /> : 'Stop stream'}</Button>
       )}
-      <button onClick={() => setActive(true)}>Modal settings</button>
-      <ModalSettingsUser active={active} setActive={setActive} who={who} />
-
-      <br />
-      <br />
-      {isLoading && isActive ? (
-        <h3>Loading...</h3>
-      ) : (
-        isActive && <h1>Amount of stream: {amountOfStream.toFixed(5)}</h1>
+      {isActive && (
+        <div style={{ display: 'flex' }}>
+          Amount of stream: {isLoadingBalance ? <Loader /> : amountOfStream.toFixed(5)}
+        </div>
       )}
-    </>
+      <Button onClick={() => setActive(true)}>Settings</Button>
+      <Modal active={active} setActive={setActive}>
+        <ModalSettingsUser setActive={setActive} who={who} />
+      </Modal>
+      <Notif active={notif}>{notif}</Notif>
+    </ul>
   );
 };
-
-export default UserCard;

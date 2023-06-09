@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ethers } from "ethers";
+import { useState } from 'react';
+import { ethers } from 'ethers';
 
 const useDeleteEmployee = (
   signedCompanyContract,
@@ -11,19 +11,18 @@ const useDeleteEmployee = (
   setArrEmployee,
   setActive
 ) => {
-  const [isLoadingDel, setIsLoadingDel] = useState(false);
-  const [errorDel, setErrorDel] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [notif, setNotif] = useState('');
 
   const handleDelete = async () => {
     try {
-      setIsLoadingDel(true);
+      setNotif('');
+      setIsLoading(true);
       const deleteUser = await signedCompanyContract.deleteEmployee(who);
       await deleteUser.wait();
 
       // Refresh array of employees
-      const amountEmployee = (
-        await contractCompany.amountEmployee()
-      ).toNumber();
+      const amountEmployee = (await contractCompany.amountEmployee()).toNumber();
       dispatch(setAmountEmployee(amountEmployee));
 
       let employeeArr = [];
@@ -41,19 +40,18 @@ const useDeleteEmployee = (
         employeeArr.push(employee);
       }
       dispatch(setArrEmployee(employeeArr));
-    } catch (error) {
-      console.log(error);
-      setErrorDel("Something've gone wrong");
-      setTimeout(() => {
-        setErrorDel(null);
-      }, 2000);
-    } finally {
-      setIsLoadingDel(false);
       setActive(false);
+      setNotif('Success!');
+    } catch (error) {
+      console.error('An error occurred:', error);
+      setNotif('An error occurred!');
+    } finally {
+      setIsLoading(false);
+      setNotif('An error occurred!');
     }
   };
 
-  return { isLoadingDel, errorDel, handleDelete };
+  return { handleDelete, isLoading, notif, setNotif };
 };
 
 export default useDeleteEmployee;

@@ -1,29 +1,33 @@
-import { useState } from "react";
-import { setToken } from "@/store/reducers/contract/reducer";
-import { useDispatch } from "react-redux";
-import usePrepareCompanyContract from "./usePrepareCompanyContract";
+import { useState } from 'react';
+import { setToken } from '@/store/reducers/contract/reducer';
+import { useDispatch } from 'react-redux';
+import usePrepareCompanyContract from './usePrepareCompanyContract';
 
 const useSetToken = () => {
-  const [loadingToken, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [notif, setNotif] = useState('');
   const dispatch = useDispatch();
 
   const { signedCompanyContract } = usePrepareCompanyContract();
 
   const handleSetToken = async (tokenAddress, setActiveTab) => {
     try {
-      setLoading(true);
+      setNotif('');
+      setIsLoading(true);
       const tx = await signedCompanyContract.setToken(tokenAddress);
       await tx.wait();
-      setLoading(false);
       dispatch(setToken(tokenAddress));
-      setActiveTab("Set Admin");
+      setNotif('Success!');
+      setActiveTab('Set Admin');
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+      console.error('An error occurred:', error);
+      setNotif('An error occurred!');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { loadingToken, handleSetToken };
+  return { isLoading, notif, handleSetToken };
 };
 
 export default useSetToken;

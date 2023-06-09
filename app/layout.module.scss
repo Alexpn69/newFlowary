@@ -8,7 +8,6 @@
   flex-direction: column;
   background-color: #1c305a;
   overflow-y: auto;
-  width: 325px;
 }
 .wrapper {
   display: flex;
@@ -33,15 +32,6 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.header {
-  height: 75px;
-  border-bottom: 1px solid rgba(39, 59, 113, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 0 85px;
-}
 .lendheader {
   height: 75px;
   display: flex;
@@ -55,9 +45,21 @@
   flex: 1;
   width: 100%;
 }
-.main {
-  padding-top: 20px;
+.header {
+  height: 75px;
+  border-bottom: 1px solid #dadada;
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0 85px;
+  position: relative;
+}
+.main {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 5px;
 }

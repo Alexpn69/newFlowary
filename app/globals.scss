@@ -9,6 +9,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
+  overflow: hidden;
 }
 a,
 a:link,
@@ -90,5 +91,5 @@ legend {
   display: block;
 }
 .swiper-pagination-bullet-active {
-  background: #273b69 !important;
+  background: #0c55ff !important;
 }

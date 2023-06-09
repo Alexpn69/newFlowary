@@ -11,28 +11,22 @@ import {
   ContractLogo,
   OwnerLogo,
   Slider,
+  BestPerformers,
+  Loader,
 } from '@/components';
 import { useState } from 'react';
 
 export default function Overview() {
   const [staff, setStaff] = useState(false);
-  const {
-    name,
-    address,
-    owner,
-    admin,
-    balance,
-    arrOutsource,
-    arrEmployee,
-    symbolToken,
-  } = useSelector(contractSelector);
-  const sumOfOutsource =
-    arrOutsource.reduce((acc, obj) => acc + Number(obj.wage), 0) || 0;
-  const { arrayBlock } = useGetAllLogs();
-  const sumOfInternal = sumValuesByKey(arrayBlock, 'earned');
+  const { name, role, address, owner, admin, balance, arrOutsource, arrEmployee, symbolToken } =
+    useSelector(contractSelector);
+  const { arrayBlock, isLoading, notif } = useGetAllLogs();
+  const totalValueStreams = sumValuesByKey(arrayBlock, 'earned');
+  const totalValueOutsource = sumValuesByKey(arrOutsource, 'wage');
 
-  // const totalValueStreams = sumValuesByKey(arrayBlock, 'earned');
-  // const totalValueOutsource = sumValuesByKey(arrOutsource, 'wage');
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -45,8 +39,7 @@ export default function Overview() {
             </div>
             <div className={styles.text}>
               <h3>Company Contract</h3>
-              <p>{address}</p>
-              {/* <p>{`${address.substring(0, 5)}...${address.slice(-4)}`}</p> */}
+              <p>{`${address.substr(0, 5)}...${address.substr(-4)}`}</p>
             </div>
           </div>
           <div className={styles.row}>
@@ -55,7 +48,7 @@ export default function Overview() {
             </div>
             <div className={styles.text}>
               <h3>Owner</h3>
-              <p>{owner}</p>
+              <p>{`${owner.substr(0, 5)}...${owner.substr(-4)}`}</p>
             </div>
           </div>
           <div className={styles.row}>
@@ -64,7 +57,7 @@ export default function Overview() {
             </div>
             <div className={styles.text}>
               <h3>Admin</h3>
-              <p>{admin}</p>
+              <p>{`${admin.substr(0, 5)}...${admin.substr(-4)}`}</p>
             </div>
           </div>
         </div>
@@ -77,10 +70,7 @@ export default function Overview() {
         <div className={styles.staff}>
           <div className={styles.head}>
             {staff ? 'Outsorce Stats' : 'Internal Stats'}
-            <Button
-              className={styles.btn}
-              onClick={() => setStaff((prev) => !prev)}
-            >
+            <Button className={styles.btn} onClick={() => setStaff((prev) => !prev)}>
               <ChangeLogo className={styles.svg} />
             </Button>
           </div>
@@ -89,8 +79,8 @@ export default function Overview() {
             <h4>
               <span>
                 {staff
-                  ? `${parseFloat(sumOfOutsource).toFixed(2)} ${symbolToken}`
-                  : `${parseFloat(sumOfInternal).toFixed(2)} ${symbolToken}`}
+                  ? `${parseFloat(totalValueOutsource).toFixed(2)} ${symbolToken}`
+                  : `${parseFloat(totalValueStreams).toFixed(2)} ${symbolToken}`}
               </span>
             </h4>
           </div>
@@ -109,17 +99,14 @@ export default function Overview() {
         </div>
       </div>
       <div className={styles.right}>
-        <h2 className={styles.title}>
-          Welcome back, dear <span>Owner!</span>
-        </h2>
-        <Slider />
+        <div className={styles.top}>
+          <h2 className={styles.title}>
+            Welcome back, dear <span>{role}!</span>
+          </h2>
+          <Slider />
+        </div>
+        <BestPerformers />
       </div>
     </>
   );
-}
-
-{
-  /* <h2 className={styles.title}>
-          Welcome back, dear <span>Owner!</span>
-        </h2> */
 }
