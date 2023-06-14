@@ -28,25 +28,6 @@ export const TOKEN_ABI = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
       { indexed: true, internalType: "address", name: "from", type: "address" },
       { indexed: true, internalType: "address", name: "to", type: "address" },
       {
@@ -87,23 +68,6 @@ export const TOKEN_ABI = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
-    name: "burn",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address", name: "account", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-    ],
-    name: "burnFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "decimals",
     outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
@@ -131,10 +95,7 @@ export const TOKEN_ABI = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address", name: "to", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-    ],
+    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
     name: "mint",
     outputs: [],
     stateMutability: "nonpayable",
@@ -145,20 +106,6 @@ export const TOKEN_ABI = [
     name: "name",
     outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -193,13 +140,6 @@ export const TOKEN_ABI = [
     ],
     name: "transferFrom",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
-    name: "transferOwnership",
-    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },

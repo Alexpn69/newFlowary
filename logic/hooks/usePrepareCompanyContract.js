@@ -24,7 +24,11 @@ const usePrepareCompanyContract = () => {
     };
 
     fetchData();
-  }, []);
+    return () => {
+      setContractCompany(null);
+      setSignedCompanyContract(null);
+    };
+  }, [address]);
   return { contractCompany, signedCompanyContract };
 };
 

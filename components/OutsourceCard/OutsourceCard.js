@@ -5,7 +5,7 @@ import { OutsourceTask } from "./OutsourceTask";
 import { Modal } from "../Modal/Modal";
 import { ModalNewOutsoreceTask } from "./ModalNewOutsoreceTask";
 import { Button } from "../Button/Button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 
 export const OutsourceCard = () => {
