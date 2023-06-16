@@ -59,6 +59,7 @@ const useOutsourceActions = (
       console.log(error);
     }
   };
+
   const handleClaim = async () => {
     try {
       setIsLoading(true);

@@ -20,7 +20,7 @@ export const OutsourceCard = () => {
       {arrOutsorceAlive.map(
         ({ taskName, wage, who, startDate, deadline, id, status }) => (
           <OutsourceTask
-            key={who}
+            key={startDate}
             who={who}
             wage={wage}
             taskName={taskName}

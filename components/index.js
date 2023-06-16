@@ -31,3 +31,6 @@ export * from "./OutsourceCard/OutsourceCard";
 export * from "./OutsourceCard/OutsourceTask";
 export * from "./OutsourceCard/ModalNewOutsoreceTask";
 export * from "./OutsourceCard/ModalSettingsOutsource";
+export * from "./ModalDeposit/ModalDeposit";
+export * from "./EmploeeCard/EmploeeCard";
+export * from "./OutsourseWorkerCard/OutsourceWorkerCard";

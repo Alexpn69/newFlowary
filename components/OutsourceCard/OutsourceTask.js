@@ -3,6 +3,7 @@ import { Modal } from "../Modal/Modal";
 import { ModalSettingsOutsource } from "./ModalSettingsOutsource";
 import { Button } from "../Button/Button";
 import { useEffect, useState } from "react";
+import WageDynamic from "./wageDynamic";
 
 export const OutsourceTask = ({
   who,
@@ -15,27 +16,13 @@ export const OutsourceTask = ({
 }) => {
   const [active, setActive] = useState(false);
   const activeStream = deadline > dayjs().unix();
-  const wagePerSecond = wage / (deadline - startDate);
-  const [wageDynamic, setWageDynamic] = useState(
-    (dayjs().unix() - startDate) * wagePerSecond
-  );
-
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (activeStream && wage > 0) {
-        setWageDynamic(wageDynamic + wagePerSecond / 10);
-      }
-    }, 100);
-    return () => {
-      clearInterval(myInterval);
-    };
-  });
-  console.log("RERENDER");
 
   return (
     <>
       <p>TaskName: {taskName}</p>
-      <div>{activeStream && wageDynamic.toFixed(4)}</div>
+      {activeStream && (
+        <WageDynamic wage={wage} startDate={startDate} deadline={deadline} />
+      )}
       <div>
         Status:
         {activeStream ? (

@@ -1,10 +1,20 @@
 "use client";
-import { Button, InputForm, AccessDenied, Notif, Loader } from "@/components";
+import {
+  Button,
+  InputForm,
+  AccessDenied,
+  Notif,
+  Loader,
+  Modal,
+  ModalDeposit,
+} from "@/components";
 import styles from "./page.module.scss";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 import useSettingsActions from "@/logic/hooks/useSettingsActions";
+import { useState } from "react";
+import useLoadWithdraw from "@/logic/hooks/useLoadWithdraw";
 
 export default function Settings() {
   const { owner, admin, role, token, liquidation, hl } =
@@ -21,6 +31,14 @@ export default function Settings() {
     isLoadingClaim,
     notif,
   } = useSettingsActions();
+
+  const {
+    notif: notifWithdraw,
+    isLoadingWithdraw,
+    handleWithdrawMoney,
+  } = useLoadWithdraw();
+
+  const [active, setActive] = useState(false);
 
   if (!walletAddress && role !== "Spectator") {
     return <AccessDenied type="wallet" />;
@@ -61,7 +79,7 @@ export default function Settings() {
             isLoading={isLoadingBuffer}
           />
         </div>
-        {token != "0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7" && (
+        {token === "0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7" && (
           <div className={styles.box}>
             <h2>Goerli Faucet</h2>
             <InputForm
@@ -76,18 +94,30 @@ export default function Settings() {
         <div className={styles.payment}>
           <h3>Payment</h3>
           <div className={styles.wrap}>
-            <Button className={styles.btn}>Load Deposit</Button>
-            <Button className={styles.btn}>Withdraw Money</Button>
+            <Button className={styles.btn} onClick={() => setActive(true)}>
+              Load Deposit
+            </Button>
+            <Modal active={active} setActive={setActive}>
+              <ModalDeposit setActive={setActive} active={active} />
+            </Modal>
+            {isLoadingWithdraw ? (
+              <Loader />
+            ) : (
+              <Button className={styles.btn} onClick={handleWithdrawMoney}>
+                Withdraw Money
+              </Button>
+            )}
           </div>
+          <Notif active={notifWithdraw}>{notifWithdraw}</Notif>
         </div>
         <div className={styles.liquid}>
           <h3>Liquidation</h3>
-          <h4>Happed if smart contract went bankrupt, and cant pay wages</h4>
+          <h4>Happened if smart contract went bankrupt, and cant pay wages</h4>
           <p>Status : {String(liquidation)}</p>
         </div>
       </div>
     );
-  } else if (role === "Worker" || role === "Outsourcer") {
+  } else if (role === "Worker") {
     return <div>ты всего лишь работяга</div>;
   } else {
     return <AccessDenied />;

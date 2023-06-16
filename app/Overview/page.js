@@ -1,9 +1,9 @@
-'use client';
-import styles from './page.module.scss';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import { useSelector } from 'react-redux';
-import { sumValuesByKey } from '@/logic/functions/utils';
-import useGetAllLogs from '@/logic/hooks/useGetAllLogs';
+"use client";
+import styles from "./page.module.scss";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useSelector } from "react-redux";
+import { sumValuesByKey } from "@/logic/functions/utils";
+import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 import {
   AdminLogo,
   Button,
@@ -13,16 +13,25 @@ import {
   Slider,
   BestPerformers,
   Loader,
-} from '@/components';
-import { useState } from 'react';
+} from "@/components";
+import { useState } from "react";
 
 export default function Overview() {
   const [staff, setStaff] = useState(false);
-  const { name, role, address, owner, admin, balance, arrOutsource, arrEmployee, symbolToken } =
-    useSelector(contractSelector);
-  const { arrayBlock, isLoading, notif } = useGetAllLogs();
-  const totalValueStreams = sumValuesByKey(arrayBlock, 'earned');
-  const totalValueOutsource = sumValuesByKey(arrOutsource, 'wage');
+  const {
+    name,
+    role,
+    address,
+    owner,
+    admin,
+    balance,
+    arrOutsource,
+    arrEmployee,
+    symbolToken,
+  } = useSelector(contractSelector);
+  const { arrayBlock, isLoading } = useGetAllLogs();
+  const totalValueStreams = sumValuesByKey(arrayBlock, "earned");
+  const totalValueOutsource = sumValuesByKey(arrOutsource, "wage");
 
   if (isLoading) {
     return <Loader />;
@@ -69,8 +78,11 @@ export default function Overview() {
         </div>
         <div className={styles.staff}>
           <div className={styles.head}>
-            {staff ? 'Outsorce Stats' : 'Internal Stats'}
-            <Button className={styles.btn} onClick={() => setStaff((prev) => !prev)}>
+            {staff ? "Outsorce Stats" : "Internal Stats"}
+            <Button
+              className={styles.btn}
+              onClick={() => setStaff((prev) => !prev)}
+            >
               <ChangeLogo className={styles.svg} />
             </Button>
           </div>
@@ -79,8 +91,12 @@ export default function Overview() {
             <h4>
               <span>
                 {staff
-                  ? `${parseFloat(totalValueOutsource).toFixed(2)} ${symbolToken}`
-                  : `${parseFloat(totalValueStreams).toFixed(2)} ${symbolToken}`}
+                  ? `${parseFloat(totalValueOutsource).toFixed(
+                      2
+                    )} ${symbolToken}`
+                  : `${parseFloat(totalValueStreams).toFixed(
+                      2
+                    )} ${symbolToken}`}
               </span>
             </h4>
           </div>

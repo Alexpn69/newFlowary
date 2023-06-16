@@ -1,25 +1,33 @@
-'use client';
-import { useSelector } from 'react-redux';
-import styles from './page.module.scss';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import { useState } from 'react';
+"use client";
+import { useSelector } from "react-redux";
+import styles from "./page.module.scss";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useState } from "react";
 import {
   Button,
   AccessDenied,
   UserCard,
   Modal,
   ModalAddNewUser,
-} from '@/components';
-import { useAccount } from 'wagmi';
+  EmploeeCard,
+} from "@/components";
+import { useAccount } from "wagmi";
 
 export default function Internalstaff() {
   const [active, setActive] = useState(false);
   const { address: walletAddress } = useAccount();
-  const { role, arrEmployee } = useSelector(contractSelector);
+  const { role, arrEmployee, address } = useSelector(contractSelector);
 
-  if (!walletAddress && role !== 'Spectator') {
+  if (
+    !walletAddress &&
+    address !== "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a"
+  ) {
     return <AccessDenied type="wallet" />;
-  } else if (role === 'Owner' || role === 'Admin' || role === 'Spectator') {
+  } else if (
+    role === "Owner" ||
+    role === "Admin" ||
+    address === "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a"
+  ) {
     return (
       <>
         <Button className={styles.btn} onClick={() => setActive(true)}>
@@ -31,12 +39,16 @@ export default function Internalstaff() {
           ))}
         </ul>
         <Modal active={active} setActive={setActive}>
-          <ModalAddNewUser />
+          <ModalAddNewUser setActive={setActive} />
         </Modal>
       </>
     );
-  } else if (role === 'Worker' || role === 'Employee') {
-    return <>показывать сотруднику только сотрудника компонент</>;
+  } else if (role === "Worker") {
+    return (
+      <>
+        <EmploeeCard key={walletAddress} />
+      </>
+    );
   } else {
     return <AccessDenied />;
   }

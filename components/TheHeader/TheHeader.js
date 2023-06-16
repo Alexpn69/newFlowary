@@ -4,27 +4,17 @@ import styles from "./TheHeader.module.scss";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { contractSelector, setRole } from "@/store/reducers/contract/reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
+import useRole from "@/logic/hooks/useRole";
 
 export const TheHeader = ({ ...props }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
   const { address: walletAddress } = useAccount();
-  const {
-    address,
-    name,
-    owner,
-    role,
-    admin,
-    arrOutsource,
-    arrEmployee,
-    balance,
-    symbolToken,
-  } = useSelector(contractSelector);
+  const { name, role, balance, symbolToken } = useSelector(contractSelector);
 
   const handleInfoHover = () => {
     setIsOpen(true);
@@ -32,42 +22,7 @@ export const TheHeader = ({ ...props }) => {
   const handleInfoLeave = () => {
     setIsOpen(false);
   };
-  useEffect(() => {
-    if (pathname !== "/") {
-      if (walletAddress === owner) {
-        dispatch(setRole("Owner"));
-      } else if (walletAddress === admin) {
-        dispatch(setRole("Admin"));
-      } else if (
-        arrEmployee.find((employee) => employee.who === walletAddress) &&
-        arrOutsource.find((outsource) => outsource.who === walletAddress)
-      ) {
-        dispatch(setRole("Worker"));
-      } else if (
-        arrEmployee.find((employee) => employee.who === walletAddress)
-      ) {
-        dispatch(setRole("Employee"));
-      } else if (
-        arrOutsource.find((outsource) => outsource.who === walletAddress)
-      ) {
-        dispatch(setRole("Outsourcer"));
-      } else if (address === "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a") {
-        dispatch(setRole("Spectator"));
-      } else {
-        dispatch(setRole("Guest"));
-      }
-    }
-  }, [
-    address,
-    admin,
-    arrEmployee,
-    arrOutsource,
-    dispatch,
-    owner,
-    pathname,
-    walletAddress,
-  ]);
-
+  useRole();
   return (
     <header {...props}>
       {pathname === "/" && (
