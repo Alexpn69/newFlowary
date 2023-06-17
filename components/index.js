@@ -34,3 +34,4 @@ export * from "./OutsourceCard/ModalSettingsOutsource";
 export * from "./ModalDeposit/ModalDeposit";
 export * from "./EmploeeCard/EmploeeCard";
 export * from "./OutsourseWorkerCard/OutsourceWorkerCard";
+export * from "./History/StreamHistory";

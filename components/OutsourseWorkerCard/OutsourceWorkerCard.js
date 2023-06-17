@@ -8,15 +8,10 @@ export const OutsourceWorkerCard = () => {
   const { arrOutsource } = useSelector(contractSelector);
   const { address: walletAddress } = useAccount();
 
-  let employee;
-  if (walletAddress) {
-    employee = arrOutsource.find(
-      (outsource) => outsource.who === walletAddress
-    );
-  }
+  const employee = walletAddress
+    ? arrOutsource.find((outsource) => outsource.who === walletAddress)
+    : undefined;
   const activeStream = employee?.deadline > dayjs().unix();
-
-  console.log("employee");
 
   return (
     <>

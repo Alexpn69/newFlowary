@@ -18,11 +18,10 @@ export const EmploeeCard = () => {
     amountOfStream,
     handleWithdrawMoneyEmployee,
   } = useStartStopStream(walletAddress);
-  console.log("render");
-  let employee;
-  if (walletAddress) {
-    employee = arrEmployee.find((employee) => employee.who === walletAddress);
-  }
+  const employee = walletAddress
+    ? arrEmployee.find((employee) => employee.who === walletAddress)
+    : undefined;
+
   return (
     <>
       {employee ? (

@@ -2,48 +2,58 @@
 import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 import styles from "./page.module.scss";
 import dayjs, { Dayjs } from "dayjs";
-import { Loader, AccessDenied } from "@/components";
+import { Loader, AccessDenied, StreamHistory } from "@/components";
 import { useAccount } from "wagmi";
 import { useSelector } from "react-redux";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 
 export default function History() {
-  const { role } = useSelector(contractSelector);
+  const { role, address, arrOutsource } = useSelector(contractSelector);
   const { isLoading, arrayBlock } = useGetAllLogs();
   const { address: walletAddress } = useAccount();
-  console.log("Statistika", arrayBlock);
+  const streamsEmployee = arrayBlock.filter(
+    (employee) => employee.addr === walletAddress
+  );
+  const outsourceEmployee = arrOutsource.filter((i) => i.who === walletAddress);
 
-  if (!walletAddress && role !== "Spectator") {
+  if (
+    !walletAddress &&
+    address !== "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a"
+  ) {
     return <AccessDenied type="wallet" />;
-  } else if (isLoading) {
-    return <Loader />;
-  } else if (role === "Owner" || role === "Admin" || role === "Spectator") {
+  } else if (
+    role === "Owner" ||
+    role === "Admin" ||
+    address === "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a"
+  ) {
     return (
       <>
-        {arrayBlock && (
-          <div>
+        {arrayBlock &&
+          (isLoading ? (
+            <Loader />
+          ) : (
             <div>
-              Smotri v consoli arrayBlock - eto statistika po vsem strimam,
-              nizhe vivel info po 1 strimu dly obrazca
+              <StreamHistory streams={arrayBlock} outsource={arrOutsource} />
             </div>
-            <div>Staus: {arrayBlock[0]?.name}</div>
-            <div>Summa strima: {arrayBlock[0]?.earned}</div>
-            <div>
-              {" "}
-              Vremya nachala strima{" "}
-              {dayjs.unix(arrayBlock[0]?.startAt).format("HH:mm DD/MM/YYYY")}
-            </div>
-            <div>
-              Vremya finisha strima{" "}
-              {dayjs.unix(arrayBlock[0]?.time).format("HH:mm DD/MM/YYYY")}
-            </div>
-            txHash: {arrayBlock[0]?.txHash}
-          </div>
-        )}
+          ))}
       </>
     );
   } else if (role === "Worker") {
-    return <>показывать сотруднику только историю сотрудника</>;
+    return (
+      <>
+        {streamsEmployee &&
+          (isLoading ? (
+            <Loader />
+          ) : (
+            <div>
+              <StreamHistory
+                streams={streamsEmployee}
+                outsource={outsourceEmployee}
+              />
+            </div>
+          ))}
+      </>
+    );
   } else {
     return <AccessDenied />;
   }

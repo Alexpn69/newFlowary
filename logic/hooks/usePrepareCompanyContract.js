@@ -10,24 +10,26 @@ const usePrepareCompanyContract = () => {
   const [signedCompanyContract, setSignedCompanyContract] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { contract, contractSigner } = await getSignedContract(
-          CONTRACT_INSTANCE_ABI,
-          address
-        );
-        setContractCompany(contract);
-        setSignedCompanyContract(contractSigner);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    if (address) {
+      const fetchData = async () => {
+        try {
+          const { contract, contractSigner } = await getSignedContract(
+            CONTRACT_INSTANCE_ABI,
+            address
+          );
+          setContractCompany(contract);
+          setSignedCompanyContract(contractSigner);
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
-    fetchData();
-    return () => {
-      setContractCompany(null);
-      setSignedCompanyContract(null);
-    };
+      fetchData();
+      return () => {
+        setContractCompany(null);
+        setSignedCompanyContract(null);
+      };
+    }
   }, [address]);
   return { contractCompany, signedCompanyContract };
 };
