@@ -1,18 +1,18 @@
-'use client';
-import styles from './page.module.scss';
-import { useState } from 'react';
-import clsx from 'clsx';
-import { Button, LendingCard } from '@/components';
-import { titles } from '@/constants/lendingTitle';
+"use client";
+import styles from "./page.module.scss";
+import { useState } from "react";
+import clsx from "clsx";
+import { Button, LendingCard } from "@/components";
+import { titles } from "@/constants/lendingTitle";
 
-export default function Home() {
+export default function Page() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <>
       <div className={styles.left}>
         {activeTab === 0 ? (
-          <Button className={styles.btn} onClick={() => setActiveTab('create')}>
+          <Button className={styles.btn} onClick={() => setActiveTab("create")}>
             Get Started
           </Button>
         ) : (
