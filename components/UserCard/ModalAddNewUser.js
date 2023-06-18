@@ -1,6 +1,7 @@
-import { Loader, Notif } from '@/components';
-import useAddEmployee from '@/logic/hooks/useAddEmployee';
-import { useRef } from 'react';
+"use client";
+import { Loader, Notif } from "@/components";
+import useAddEmployee from "@/logic/hooks/useAddEmployee";
+import { useRef } from "react";
 
 export const ModalAddNewUser = ({ setActive }) => {
   const rateRef = useRef();
@@ -14,13 +15,13 @@ export const ModalAddNewUser = ({ setActive }) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    if (addressUserRef.current.value !== '' && rateRef.current.value !== '') {
+    if (addressUserRef.current.value !== "" && rateRef.current.value !== "") {
       handleNewUser();
-      addressUserRef.current.value = '';
-      rateRef.current.value = '';
+      addressUserRef.current.value = "";
+      rateRef.current.value = "";
     } else {
-      setNotif('Enter something!');
-      setTimeout(() => setNotif(''), 5000);
+      setNotif("Enter something!");
+      setTimeout(() => setNotif(""), 5000);
     }
   };
 

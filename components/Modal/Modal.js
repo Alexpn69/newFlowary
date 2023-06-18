@@ -1,5 +1,6 @@
-import styles from './Modal.module.scss';
-import clsx from 'clsx';
+"use client";
+import styles from "./Modal.module.scss";
+import clsx from "clsx";
 
 export const Modal = ({ active, setActive, children }) => {
   return (

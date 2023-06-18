@@ -1,3 +1,4 @@
+"use client";
 import dayjs from "dayjs";
 import { Modal } from "../Modal/Modal";
 import { ModalSettingsOutsource } from "./ModalSettingsOutsource";

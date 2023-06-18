@@ -1,20 +1,22 @@
-import { Button, Loader, Notif } from '@/components';
-import useDeleteEmployee from '@/logic/hooks/useDeleteEmployee';
-import usePrepareCompanyContract from '@/logic/hooks/usePrepareCompanyContract';
-import useRateChange from '@/logic/hooks/useRateChange';
+"use client";
+import { Button, Loader, Notif } from "@/components";
+import useDeleteEmployee from "@/logic/hooks/useDeleteEmployee";
+import usePrepareCompanyContract from "@/logic/hooks/usePrepareCompanyContract";
+import useRateChange from "@/logic/hooks/useRateChange";
 import {
   contractSelector,
   setAmountEmployee,
   setArrEmployee,
-} from '@/store/reducers/contract/reducer';
-import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@/store/reducers/contract/reducer";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ModalSettingsUser = ({ setActive, who }) => {
   const newRateRef = useRef();
   const dispatch = useDispatch();
   const { decimalsToken } = useSelector(contractSelector);
-  const { contractCompany, signedCompanyContract } = usePrepareCompanyContract();
+  const { contractCompany, signedCompanyContract } =
+    usePrepareCompanyContract();
 
   const {
     handleRateChange,
@@ -49,18 +51,18 @@ export const ModalSettingsUser = ({ setActive, who }) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    setDeleteNotif('');
-    if (newRateRef.current.value !== '') {
+    setDeleteNotif("");
+    if (newRateRef.current.value !== "") {
       handleRateChange();
-      newRateRef.current.value = '';
+      newRateRef.current.value = "";
     } else {
-      setRateChangeNotif('Enter something!');
-      setTimeout(() => setRateChangeNotif(''), 5000);
+      setRateChangeNotif("Enter something!");
+      setTimeout(() => setRateChangeNotif(""), 5000);
     }
   };
 
   const onHandleDelete = () => {
-    setRateChangeNotif('');
+    setRateChangeNotif("");
     handleDelete();
   };
 

@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import clsx from 'clsx';
-import styles from './Notif.module.scss';
+"use client";
+import { useState, useEffect } from "react";
+import clsx from "clsx";
+import styles from "./Notif.module.scss";
 
 export const Notif = ({ active, children }) => {
   const [isVisible, setIsVisible] = useState(active);

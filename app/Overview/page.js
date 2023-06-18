@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import styles from "./page.module.scss";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import { useSelector } from "react-redux";
@@ -14,10 +14,10 @@ import {
   BestPerformers,
   Loader,
 } from "@/components";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function Overview() {
-  const [staff, setStaff] = useState(false);
+  // const [staff, setStaff] = useState(false);
   const {
     name,
     role,
@@ -78,38 +78,38 @@ export default function Overview() {
         </div>
         <div className={styles.staff}>
           <div className={styles.head}>
-            {staff ? "Outsorce Stats" : "Internal Stats"}
-            <Button
+            {/* {staff ? "Outsorce Stats" : "Internal Stats"} */}
+            {/* <Button
               className={styles.btn}
               onClick={() => setStaff((prev) => !prev)}
             >
               <ChangeLogo className={styles.svg} />
-            </Button>
+            </Button> */}
           </div>
           <div className={styles.row}>
             <h3>Stream Value</h3>
             <h4>
               <span>
-                {staff
+                {/* {staff
                   ? `${parseFloat(totalValueOutsource).toFixed(
                       2
                     )} ${symbolToken}`
                   : `${parseFloat(totalValueStreams).toFixed(
                       2
-                    )} ${symbolToken}`}
+                    )} ${symbolToken}`} */}
               </span>
             </h4>
           </div>
           <div className={styles.row}>
             <h3>Stream Count</h3>
             <h4>
-              <span>{staff ? arrOutsource.length : arrayBlock.length}</span>
+              {/* <span>{staff ? arrOutsource.length : arrayBlock.length}</span> */}
             </h4>
           </div>
           <div className={styles.row}>
             <h3>All Performers</h3>
             <h4>
-              <span>{staff ? arrOutsource.length : arrEmployee.length}</span>
+              {/* <span>{staff ? arrOutsource.length : arrEmployee.length}</span> */}
             </h4>
           </div>
         </div>

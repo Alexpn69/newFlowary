@@ -1,3 +1,4 @@
+"use client";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";

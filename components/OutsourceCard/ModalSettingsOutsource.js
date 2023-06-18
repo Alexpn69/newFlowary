@@ -1,3 +1,4 @@
+"use client";
 import { Button, Loader, Notif } from "@/components";
 import useOutsourceActions from "@/logic/hooks/useOutsourceActions";
 import dayjs from "dayjs";

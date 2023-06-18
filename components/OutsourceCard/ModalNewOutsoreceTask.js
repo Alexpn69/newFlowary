@@ -1,3 +1,4 @@
+"use client";
 import { Loader, Notif } from "@/components";
 import useOutsourceActions from "@/logic/hooks/useOutsourceActions";
 import { useRef } from "react";

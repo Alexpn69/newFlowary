@@ -1,3 +1,4 @@
+"use client";
 import useStartStopStream from "@/logic/hooks/useStartStopStream";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import { useSelector } from "react-redux";
