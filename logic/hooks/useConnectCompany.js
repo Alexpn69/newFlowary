@@ -24,7 +24,7 @@ export const useConnectCompany = () => {
       const record = await getRecordByName(companyName);
       if (record) {
         await connectContract(record.address, dispatch);
-        router.push("/Overview");
+        router.push("/overview");
         setNotif("Success!");
         return true;
       } else {
