@@ -16,8 +16,7 @@ import {
 } from "@/components";
 import { useState } from "react";
 
-export default function overview() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function Page() {
   const [staff, setStaff] = useState(false);
   const {
     name,
