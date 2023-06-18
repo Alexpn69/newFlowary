@@ -25,11 +25,11 @@ export const TheHeader = ({ ...props }) => {
   useRole();
   return (
     <header {...props}>
-      {pathname === "/" && (
+      {/* {pathname === "/" && (
         <Link href="/overview" className={styles.logo}>
           <h1>Flowary</h1>
         </Link>
-      )}
+      )} */}
       {pathname !== "/" && (
         <>
           {walletAddress ? (
