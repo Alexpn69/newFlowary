@@ -16,7 +16,7 @@ import {
 } from '@/components';
 import { useState } from 'react';
 
-export default function Overview() {
+export default function Page() {
   const [staff, setStaff] = useState(false);
   const { name, role, address, owner, admin, balance, arrOutsource, arrEmployee, symbolToken } =
     useSelector(contractSelector);

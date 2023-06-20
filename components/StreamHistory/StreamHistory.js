@@ -1,3 +1,4 @@
+"use client";
 import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 import { Loader } from "../Loader/Loader";
 import { useState } from "react";
