@@ -36,7 +36,7 @@ export const ModalSettingsOutsource = ({
       {status === 2 ? (
         <Button
           onClick={handleFinishJob}
-          disabled={role !== "Owner" || role !== "Admin"}
+          disabled={role !== "Owner" && role !== "Admin"}
           loader={isLoading}
           type="main"
         >

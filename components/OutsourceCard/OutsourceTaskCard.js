@@ -42,7 +42,7 @@ export const OutsourceTaskCard = ({
             <h4 className={styles.right}>{symbolToken}</h4>
           </span>
         ) : (
-          <h6>Stream stopped</h6>
+          <h6>Job is done</h6>
         )}
       </li>
       <li>
