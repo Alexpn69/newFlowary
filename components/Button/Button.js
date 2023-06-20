@@ -8,13 +8,22 @@ export const Button = ({
   style,
   children,
   loader = false,
+  type = '',
+  color = '',
   ...rest
 }) => {
   return (
     <button
-      className={clsx(className, styles.button, disabled && styles.disabled)}
-      onClick={onClick}
-      disabled={disabled}
+      className={clsx(
+        className,
+        styles.button,
+        type && styles[type],
+        color && styles[color],
+        disabled && styles.disabled,
+        loader && styles.disabled
+      )}
+      disabled={disabled || loader}
+      onClick={!disabled ? onClick : undefined}
       style={style}
       {...rest}
     >

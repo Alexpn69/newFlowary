@@ -1,16 +1,16 @@
-"use client";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import styles from "./CardCreate.module.scss";
-import clsx from "clsx";
-import { useState } from "react";
-import { InputForm, Loader, Notif } from "@/components";
-import useSetToken from "@/logic/hooks/useSetToken";
-import useSetAdmin from "@/logic/hooks/useSetAdmin";
-import { fullSteps } from "@/constants/listOfSteps";
-import useCreateCompany from "@/logic/hooks/useCreateCompany";
+'use client';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import styles from './CardCreate.module.scss';
+import clsx from 'clsx';
+import { useState } from 'react';
+import { Button, InputForm, Loader, Notif } from '@/components';
+import useSetToken from '@/logic/hooks/useSetToken';
+import useSetAdmin from '@/logic/hooks/useSetAdmin';
+import { fullSteps } from '@/constants/listOfSteps';
+import useCreateCompany from '@/logic/hooks/useCreateCompany';
 
 export const CardCreate = () => {
-  const [activeTab, setActiveTab] = useState("Connect Wallet");
+  const [activeTab, setActiveTab] = useState('Connect Wallet');
 
   const {
     isLoading: isLoadingCreateCompany,
@@ -18,16 +18,8 @@ export const CardCreate = () => {
     handleCreateCompany,
   } = useCreateCompany();
 
-  const {
-    handleSetToken,
-    isLoading: isLoadingSetToken,
-    notif: notifSetToken,
-  } = useSetToken();
-  const {
-    handleSetAdmin,
-    isLoading: isLoadingSetAdmin,
-    notif: notifSetAdmin,
-  } = useSetAdmin();
+  const { handleSetToken, isLoading: isLoadingSetToken, notif: notifSetToken } = useSetToken();
+  const { handleSetAdmin, isLoading: isLoadingSetAdmin, notif: notifSetAdmin } = useSetAdmin();
 
   const handleCreate = async (name) => {
     try {
@@ -57,37 +49,24 @@ export const CardCreate = () => {
     <div className={styles.create}>
       <div className={styles.menu}>
         {fullSteps.map((step, index) => (
-          <div
-            key={step}
-            className={clsx(styles.tabs, activeTab !== step && styles.active)}
-          >
+          <div key={step} className={clsx(styles.tabs, activeTab !== step && styles.active)}>
             <span>{index + 1}</span>
             <p>{step}</p>
           </div>
         ))}
       </div>
       {
-        <div
-          className={clsx(
-            styles.content,
-            activeTab === "Connect Wallet" && styles.active
-          )}
-        >
+        <div className={clsx(styles.content, activeTab === 'Connect Wallet' && styles.active)}>
           <ConnectButton />
-          <button onClick={() => setActiveTab("Create Company")}>
+          <Button onClick={() => setActiveTab('Create Company')} type="main">
             Next step
-          </button>
+          </Button>
         </div>
       }
 
       <>
-        {activeTab === "Create Company" && (
-          <div
-            className={clsx(
-              styles.content,
-              activeTab === "Create Company" && styles.active
-            )}
-          >
+        {activeTab === 'Create Company' && (
+          <div className={clsx(styles.content, activeTab === 'Create Company' && styles.active)}>
             <InputForm
               label="Company"
               placeholder="Enter Company Name"
@@ -97,32 +76,20 @@ export const CardCreate = () => {
             />
           </div>
         )}
-        {activeTab === "Set Token" && (
-          <>
-            <p>Our test token: 0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7</p>
-            <div
-              className={clsx(
-                styles.content,
-                activeTab === "Set Token" && styles.active
-              )}
-            >
-              <InputForm
-                label="Address"
-                placeholder="Enter Token Contract"
-                button="Next"
-                handler={handleToken}
-                isLoading={isLoadingSetToken}
-              />
-            </div>
-          </>
+        {activeTab === 'Set Token' && (
+          <div className={clsx(styles.content, activeTab === 'Set Token' && styles.active)}>
+            <InputForm
+              info="Our test token: 0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7"
+              label="Address"
+              placeholder="Enter Token Contract"
+              button="Next"
+              handler={handleToken}
+              isLoading={isLoadingSetToken}
+            />
+          </div>
         )}
-        {activeTab === "Set Admin" && (
-          <div
-            className={clsx(
-              styles.content,
-              activeTab === "Set Admin" && styles.active
-            )}
-          >
+        {activeTab === 'Set Admin' && (
+          <div className={clsx(styles.content, activeTab === 'Set Admin' && styles.active)}>
             <InputForm
               label="Address"
               placeholder="Enter Admin"
