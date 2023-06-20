@@ -1,55 +1,36 @@
-"use client";
-import useStartStopStream from "@/logic/hooks/useStartStopStream";
-import { contractSelector } from "@/store/reducers/contract/reducer";
-import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
-import { Button } from "../Button/Button";
-import { Loader } from "../Loader/Loader";
-import { Notif } from "../Notif/Notif";
+import styles from './EmploeeCard.module.scss';
+import { Button, Modal, ModalAddNewUser, New, EmploeeUserCard } from '@/components';
+import { contractSelector } from '@/store/reducers/contract/reducer';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export const EmploeeCard = () => {
-  const { address: walletAddress } = useAccount();
-  const { arrEmployee } = useSelector(contractSelector);
-
-  const {
-    isLoading,
-    notif,
-    isLoadingBalance,
-    isActive,
-    amountOfStream,
-    handleWithdrawMoneyEmployee,
-  } = useStartStopStream(walletAddress);
-  const employee = walletAddress
-    ? arrEmployee.find((employee) => employee.who === walletAddress)
-    : undefined;
-
+  const { arrEmployee, symbolToken } = useSelector(contractSelector);
+  const [active, setActive] = useState(false);
   return (
-    <>
-      {employee ? (
-        <>
-          <div>Your address:{employee.who}</div>
-          <div>Your rate: {employee.rate}</div>
-        </>
-      ) : (
-        <div>You dont have active tasks</div>
-      )}
-
-      {isActive && (
-        <>
-          <div>{isLoadingBalance ? <Loader /> : amountOfStream.toFixed(5)}</div>
-          <br />
-          <div>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <Button onClick={handleWithdrawMoneyEmployee}>
-                Withdraw money
-              </Button>
-            )}
-          </div>
-          <Notif active={notif}>{notif}</Notif>
-        </>
-      )}
-    </>
+    <div className={styles.wrapper}>
+      <Button type="main" className={styles.btn} onClick={() => setActive(true)}>
+        <New className={styles.svg} />
+        Add New Employee
+      </Button>
+      <ul className={styles.list}>
+        <ul className={styles.top}>
+          <li>Address/Rate</li>
+          <li>Change State</li>
+          <li>Amount of stream</li>
+        </ul>
+        {}
+        {arrEmployee.length > 0 ? (
+          arrEmployee.map(({ who, rate }) => (
+            <EmploeeUserCard key={who} who={who} rate={rate} symbolToken={symbolToken} />
+          ))
+        ) : (
+          <p className={styles.notask}>Employees not found!</p>
+        )}
+      </ul>
+      <Modal active={active} setActive={setActive}>
+        <ModalAddNewUser setActive={setActive} />
+      </Modal>
+    </div>
   );
 };

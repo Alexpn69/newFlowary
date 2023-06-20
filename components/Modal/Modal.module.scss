@@ -23,8 +23,8 @@
   border-radius: 24px;
   padding: 16px;
   display: flex;
-  width: 554px;
-  height: 352px;
+  width: 654px;
+  height: 415px;
   position: relative;
   top: 100px;
   opacity: 0;
@@ -35,6 +35,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  > .btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 @keyframes slideIn {

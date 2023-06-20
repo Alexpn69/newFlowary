@@ -1,4 +1,4 @@
-.exist {
+.form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -60,4 +60,10 @@
       transform: translateY(-1px);
     }
   }
+}
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

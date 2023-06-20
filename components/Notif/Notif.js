@@ -1,7 +1,7 @@
-"use client";
-import { useState, useEffect } from "react";
-import clsx from "clsx";
-import styles from "./Notif.module.scss";
+import { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import styles from './Notif.module.scss';
+import { Close, Button } from '@/components';
 
 export const Notif = ({ active, children }) => {
   const [isVisible, setIsVisible] = useState(active);
@@ -22,7 +22,13 @@ export const Notif = ({ active, children }) => {
 
   return (
     isVisible && (
-      <div className={clsx(styles.box)} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={clsx(styles.box, active !== 'Success!' && styles.red)}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Button className={clsx(styles.btn)} onClick={() => setIsVisible(false)}>
+          <Close className={clsx(styles.svg)} />
+        </Button>
         {children}
       </div>
     )

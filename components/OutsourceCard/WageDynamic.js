@@ -1,12 +1,9 @@
-"use client";
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
-const WageDynamic = ({ wage, startDate, deadline }) => {
+export const WageDynamic = ({ wage, startDate, deadline, className }) => {
   const wagePerSecond = wage / (deadline - startDate);
-  const [wageDynamic, setWageDynamic] = useState(
-    (dayjs().unix() - startDate) * wagePerSecond
-  );
+  const [wageDynamic, setWageDynamic] = useState((dayjs().unix() - startDate) * wagePerSecond);
   const activeStream = deadline > dayjs().unix();
 
   useEffect(() => {
@@ -20,11 +17,5 @@ const WageDynamic = ({ wage, startDate, deadline }) => {
       clearInterval(myInterval);
     };
   });
-  return (
-    <>
-      <div>{wageDynamic.toFixed(4)}</div>
-    </>
-  );
+  return <div className={className}>{wageDynamic.toFixed(4)}</div>;
 };
-
-export default WageDynamic;
