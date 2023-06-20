@@ -1,8 +1,14 @@
-import styles from './OutsourceCard.module.scss';
-import dayjs from 'dayjs';
-import { Modal, Button, ModalSettingsOutsource, WageDynamic, Setting } from '@/components';
-import { useState } from 'react';
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+import styles from "./OutsourceCard.module.scss";
+import dayjs from "dayjs";
+import {
+  Modal,
+  Button,
+  ModalSettingsOutsource,
+  WageDynamic,
+  Setting,
+} from "@/components";
+import { useState } from "react";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 export const OutsourceTaskCard = ({
   who,
@@ -43,7 +49,7 @@ export const OutsourceTaskCard = ({
         {activeStream ? (
           <p>Active</p>
         ) : status === 1 ? (
-          <p>Waiting for finish</p>
+          <p>Waiting for claim</p>
         ) : (
           <p>Waiting for accept</p>
         )}
