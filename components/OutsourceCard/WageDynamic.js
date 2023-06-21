@@ -17,5 +17,5 @@ export const WageDynamic = ({ wage, startDate, deadline, className }) => {
       clearInterval(myInterval);
     };
   });
-  return <div className={className}>{wageDynamic.toFixed(4)}</div>;
+  return <div className={className}>{wageDynamic.toFixed(2)}</div>;
 };

@@ -74,7 +74,7 @@ export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
           {isActive ? (
             <span>
               {isLoadingBalance ? (
-                <Loader />
+                <Loader color="green" />
               ) : (
                 <>
                   <h3 className={styles.left}>{amountOfStream.toFixed(2)}</h3>

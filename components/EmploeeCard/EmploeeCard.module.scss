@@ -63,6 +63,8 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      color: #23af72;
+      font-weight: 600;
       > .left {
         display: flex;
         align-items: center;
@@ -77,6 +79,10 @@
         flex: 1;
         margin-left: 2px;
       }
+    }
+    > h6 {
+      color: #cf3a59;
+      font-weight: 600;
     }
   }
   > .settings {

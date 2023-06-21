@@ -19,7 +19,6 @@ export const EmploeeCard = () => {
           <li>Change State</li>
           <li>Amount of stream</li>
         </ul>
-        {}
         {arrEmployee.length > 0 ? (
           arrEmployee.map(({ who, rate }) => (
             <EmploeeUserCard key={who} who={who} rate={rate} symbolToken={symbolToken} />

@@ -1,9 +1,10 @@
 'use client';
 import styles from './StreamHistory.module.scss';
 import dayjs from 'dayjs';
-
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+import clsx from 'clsx';
 export const OutsourceHistory = ({ outsource, symbolToken }) => {
-  const statusOutsource = { 1: 'Waiting for finish', 2: 'Waiting for accept', 3: 'Finished' };
+  const statusOutsource = { 1: 'Waiting for claim', 2: 'Waiting for accept', 3: 'Finished' };
   return (
     <ul className={styles.list}>
       <li>
@@ -20,12 +21,17 @@ export const OutsourceHistory = ({ outsource, symbolToken }) => {
         {outsource.length != 0 ? (
           outsource.map(({ who, status, taskName, wage, startDate, deadline }) => (
             <ul className={styles.outsourcerow} key={startDate}>
-              <li>
-                {who.substr(0, 5)}...{who.substr(-4)}
+              <li className={styles.address}>
+                <span className={styles.left}>
+                  <Jazzicon diameter={24} seed={jsNumberForAddress(who)} />
+                </span>
+                <span className={styles.right}>
+                  {who.substr(0, 5)}...{who.substr(-4)}
+                </span>
               </li>
-              <li>{statusOutsource[status]}</li>
+              <li className={clsx(styles[`status${status}`])}>{statusOutsource[status]}</li>
               <li> {taskName}</li>
-              <li>
+              <li className={styles.earned}>
                 {parseFloat(wage).toFixed(2)} {symbolToken}
               </li>
               <li> {dayjs.unix(startDate).format('HH:mm DD/MM/YYYY')}</li>

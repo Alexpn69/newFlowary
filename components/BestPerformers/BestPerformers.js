@@ -13,9 +13,9 @@ export const BestPerformers = () => {
       : [];
 
   return (
-    <div className={styles.container}>
+    <div>
       <h2 className={styles.subtitle}>Bestperformers</h2>
-      <ul className={styles.container}>
+      <div className={styles.list}>
         <ul className={styles.top}>
           <li>Address</li>
           <li>Rate</li>
@@ -34,9 +34,9 @@ export const BestPerformers = () => {
             </ul>
           ))
         ) : (
-          <li className={styles.noemployee}>Add Employee!</li>
+          <p>Add Employee!</p>
         )}
-      </ul>
+      </div>
     </div>
   );
 };

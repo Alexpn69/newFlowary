@@ -1,5 +1,4 @@
 'use client';
-import styles from './page.module.scss';
 import { useSelector } from 'react-redux';
 import { contractSelector } from '@/store/reducers/contract/reducer';
 import { AccessDenied, EmploeeCard, EmploeeWorkerCard } from '@/components';

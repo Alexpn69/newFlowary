@@ -37,17 +37,17 @@
 }
 
 .red {
-  color: rgb(230, 72, 72);
+  color: #cf3a59;
   border-radius: 12px;
-  box-shadow: 0px 5px 10px rgba(90, 28, 28, 0.1);
+  box-shadow: 0px 5px 10px #cf3a5813;
   transition: all 0.3s ease 0s;
   .loader {
-    border: 4px solid red;
+    border: 4px solid #cf3a59;
     border-left-color: transparent;
   }
   &:hover {
-    background-color: rgb(230, 72, 72);
-    box-shadow: 0px 10px 15px rgba(90, 28, 28, 0.4);
+    background-color: #cf3a59;
+    box-shadow: 0px 10px 15px #cf3a5831;
     color: #fff;
     .loader {
       border: 4px solid #ffffff;
@@ -60,17 +60,17 @@
 }
 
 .green {
-  color: rgb(101, 172, 101);
+  color: #23af72;
   border-radius: 12px;
-  box-shadow: 0px 5px 10px rgba(28, 90, 47, 0.1);
+  box-shadow: 0px 5px 10px #23af7213;
   transition: all 0.3s ease 0s;
   .loader {
-    border: 4px solid green;
+    border: 4px solid #23af72;
     border-left-color: transparent;
   }
   &:hover {
-    background-color: rgb(101, 172, 101);
-    box-shadow: 0px 10px 15px rgba(28, 90, 47, 0.4);
+    background-color: #23af72;
+    box-shadow: 0px 10px 15px #23af7231;
     color: #fff;
     .loader {
       border: 4px solid #ffffff;

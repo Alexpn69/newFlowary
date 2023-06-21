@@ -38,14 +38,14 @@ export const OutsourceTaskCard = ({
             <h4 className={styles.right}>{symbolToken}</h4>
           </span>
         ) : (
-          <h6>Stream stopped</h6>
+          <h6>Job is ended</h6>
         )}
       </li>
       <li>
         {activeStream ? (
           <p>Active</p>
         ) : status === 1 ? (
-          <p>Waiting for finish</p>
+          <p>Waiting for claim</p>
         ) : (
           <p>Waiting for accept</p>
         )}

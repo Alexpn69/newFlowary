@@ -37,6 +37,9 @@
       color: rgba(28, 31, 55, 0.8);
       border-bottom: 1px solid #dadada;
       padding: 18px 0;
+      > li {
+        gap: 5px;
+      }
     }
     > li ul {
       display: grid;
@@ -47,6 +50,42 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+      }
+      > .address {
+        gap: 5px;
+        > .left {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+        }
+        > .right {
+          flex: 2;
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+      > .active {
+        color: #cf3a59;
+        font-weight: 600;
+      }
+      > .finished {
+        color: #23af72;
+        font-weight: 600;
+      }
+      > .earned {
+        font-weight: 600;
+      }
+      > .status1 {
+        font-weight: 600;
+        color: #1c305a;
+      }
+      > .status2 {
+        font-weight: 600;
+        color: #cf3a59;
+      }
+      > .status3 {
+        font-weight: 600;
+        color: #23af72;
       }
     }
   }

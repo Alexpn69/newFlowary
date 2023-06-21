@@ -63,43 +63,40 @@ export const CardCreate = () => {
           </Button>
         </div>
       }
-
-      <>
-        {activeTab === 'Create Company' && (
-          <div className={clsx(styles.content, activeTab === 'Create Company' && styles.active)}>
-            <InputForm
-              label="Company"
-              placeholder="Enter Company Name"
-              button="Create"
-              handler={handleCreate}
-              isLoading={isLoadingCreateCompany}
-            />
-          </div>
-        )}
-        {activeTab === 'Set Token' && (
-          <div className={clsx(styles.content, activeTab === 'Set Token' && styles.active)}>
-            <InputForm
-              info="Our test token: 0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7"
-              label="Address"
-              placeholder="Enter Token Contract"
-              button="Next"
-              handler={handleToken}
-              isLoading={isLoadingSetToken}
-            />
-          </div>
-        )}
-        {activeTab === 'Set Admin' && (
-          <div className={clsx(styles.content, activeTab === 'Set Admin' && styles.active)}>
-            <InputForm
-              label="Address"
-              placeholder="Enter Admin"
-              button="Next"
-              handler={handleAdmin}
-              isLoading={isLoadingSetAdmin}
-            />
-          </div>
-        )}
-      </>
+      {activeTab === 'Create Company' && (
+        <div className={clsx(styles.content, activeTab === 'Create Company' && styles.active)}>
+          <InputForm
+            label="Company"
+            placeholder="Enter Company Name"
+            button="Create"
+            handler={handleCreate}
+            isLoading={isLoadingCreateCompany}
+          />
+        </div>
+      )}
+      {activeTab === 'Set Token' && (
+        <div className={clsx(styles.content, activeTab === 'Set Token' && styles.active)}>
+          <InputForm
+            info="Our test token: 0x7773324bCf2fA53E4f03Ee09cCEba2A6b481B9a7"
+            label="Address"
+            placeholder="Enter Token Contract"
+            button="Next"
+            handler={handleToken}
+            isLoading={isLoadingSetToken}
+          />
+        </div>
+      )}
+      {activeTab === 'Set Admin' && (
+        <div className={clsx(styles.content, activeTab === 'Set Admin' && styles.active)}>
+          <InputForm
+            label="Address"
+            placeholder="Enter Admin"
+            button="Next"
+            handler={handleAdmin}
+            isLoading={isLoadingSetAdmin}
+          />
+        </div>
+      )}
       <Notif active={notifCreateCompany}>{notifCreateCompany}</Notif>
       <Notif active={notifSetToken}>{notifSetToken}</Notif>
       <Notif active={notifSetAdmin}>{notifSetAdmin}</Notif>
