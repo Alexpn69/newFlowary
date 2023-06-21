@@ -1,9 +1,17 @@
-import styles from './OutsourceWorkerCard.module.scss';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import dayjs from 'dayjs';
-import { useSelector } from 'react-redux';
-import { useAccount } from 'wagmi';
-import { Button, Company, Freelancer, Loader, Notif, WageDynamic } from '@/components';
+import styles from "./OutsourceWorkerCard.module.scss";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import dayjs from "dayjs";
+import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
+import {
+  Button,
+  Company,
+  Freelancer,
+  Loader,
+  Notif,
+  WageDynamic,
+} from "@/components";
+import { substrAddress } from "@/logic/functions/utils";
 
 export const OutsourceWorkerCard = () => {
   const { arrOutsource, symbolToken, address } = useSelector(contractSelector);
@@ -19,18 +27,20 @@ export const OutsourceWorkerCard = () => {
       {employee ? (
         <>
           <h2 className={styles.title}>
-            {activeStream ? 'You are freelancing now!' : 'You are chilling now!'}
+            {activeStream
+              ? "You are freelancing now!"
+              : "You are chilling now!"}
           </h2>
           <ul className={styles.list}>
             <li>
               <Freelancer />
-              <h3>{`${employee.who.substr(0, 5)}...${employee.who.substr(-4)}`}</h3>
+              <h3>{substrAddress(employee.who)}</h3>
             </li>
             <li>
               <p>гифка</p>
             </li>
             <li>
-              <h3>{`${address.substr(0, 5)}...${address.substr(-4)}`}</h3>
+              <h3>{substrAddress(address)}</h3>
               <Company />
             </li>
           </ul>

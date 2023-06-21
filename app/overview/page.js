@@ -2,7 +2,7 @@
 import styles from "./page.module.scss";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import { useSelector } from "react-redux";
-import { sumValuesByKey } from "@/logic/functions/utils";
+import { substrAddress, sumValuesByKey } from "@/logic/functions/utils";
 import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 import {
   AdminLogo,
@@ -56,7 +56,7 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Company Contract</h3>
-              <p>{`${address.substr(0, 5)}...${address.substr(-4)}`}</p>
+              <p>{substrAddress(address)}</p>
             </div>
           </div>
           <div className={styles.row}>
@@ -65,7 +65,7 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Owner</h3>
-              <p>{`${owner.substr(0, 5)}...${owner.substr(-4)}`}</p>
+              <p>{substrAddress(owner)}</p>
             </div>
           </div>
           <div className={styles.row}>
@@ -74,7 +74,7 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Admin</h3>
-              <p>{`${admin.substr(0, 5)}...${admin.substr(-4)}`}</p>
+              <p>{substrAddress(admin)}</p>
             </div>
           </div>
         </div>

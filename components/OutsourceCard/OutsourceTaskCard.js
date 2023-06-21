@@ -9,6 +9,7 @@ import {
 } from "@/components";
 import { useState } from "react";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { substrAddress } from "@/logic/functions/utils";
 
 export const OutsourceTaskCard = ({
   who,
@@ -27,7 +28,7 @@ export const OutsourceTaskCard = ({
     <ul className={styles.container}>
       <li>
         <Jazzicon diameter={48} seed={jsNumberForAddress(who)} />
-        <h3>{`${who.substr(0, 5)}...${who.substr(-4)}`}</h3>
+        <h3>{substrAddress(who)}</h3>
       </li>
       <li>{taskName}</li>
       <li>

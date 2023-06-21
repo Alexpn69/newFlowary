@@ -1,21 +1,31 @@
-'use client';
-import styles from './EmploeeCard.module.scss';
-import { useState } from 'react';
-import useStartStopStream from '@/logic/hooks/useStartStopStream';
-import { Button, Delete, Loader, Modal, ModalSettingsUser, Notif, Setting } from '@/components';
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
-import useDeleteEmployee from '@/logic/hooks/useDeleteEmployee';
-import usePrepareCompanyContract from '@/logic/hooks/usePrepareCompanyContract';
+"use client";
+import styles from "./EmploeeCard.module.scss";
+import { useState } from "react";
+import useStartStopStream from "@/logic/hooks/useStartStopStream";
+import {
+  Button,
+  Delete,
+  Loader,
+  Modal,
+  ModalSettingsUser,
+  Notif,
+  Setting,
+} from "@/components";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import useDeleteEmployee from "@/logic/hooks/useDeleteEmployee";
+import usePrepareCompanyContract from "@/logic/hooks/usePrepareCompanyContract";
 import {
   contractSelector,
   setAmountEmployee,
   setArrEmployee,
-} from '@/store/reducers/contract/reducer';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@/store/reducers/contract/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { substrAddress } from "@/logic/functions/utils";
 
 export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
   const [active, setActive] = useState(false);
-  const { contractCompany, signedCompanyContract } = usePrepareCompanyContract();
+  const { contractCompany, signedCompanyContract } =
+    usePrepareCompanyContract();
   const { decimalsToken } = useSelector(contractSelector);
   const dispatch = useDispatch();
   const {
@@ -50,7 +60,7 @@ export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
         <li>
           <Jazzicon diameter={48} seed={jsNumberForAddress(who)} />
           <div className={styles.user}>
-            <h3>{`${who.substr(0, 5)}...${who.substr(-4)}`}</h3>
+            <h3>{substrAddress(who)}</h3>
             <h4>{`${rate} ${symbolToken}`}</h4>
           </div>
         </li>
@@ -59,10 +69,10 @@ export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
             <Button
               onClick={!isActive ? hadleStartStream : hadleStopStream}
               type="main"
-              color={isActive ? 'red' : 'green'}
+              color={isActive ? "red" : "green"}
               loader={isLoading}
             >
-              {!isActive ? 'Start stream' : 'Stop stream'}
+              {!isActive ? "Start stream" : "Stop stream"}
             </Button>
           }
         </li>

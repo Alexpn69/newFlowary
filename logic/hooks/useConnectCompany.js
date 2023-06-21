@@ -1,9 +1,9 @@
 import { useState } from "react";
-import getRecordByName from "../serverFunc/getRecordByName";
 import connectContract from "../functions/connectContract";
 import { useSelector } from "react-redux";
 import { contractSelector } from "@/store/reducers/contract/reducer";
 import { usePathname } from "next/navigation";
+import getRecordTest from "../serverFunc/getRecordTest";
 
 export const useConnectCompany = () => {
   const pathname = usePathname();
@@ -21,7 +21,7 @@ export const useConnectCompany = () => {
 
     try {
       setIsLoading(true);
-      const record = await getRecordByName(companyName);
+      const record = await getRecordTest(companyName);
       if (record) {
         await connectContract(record.address, dispatch);
         router.push("/overview");

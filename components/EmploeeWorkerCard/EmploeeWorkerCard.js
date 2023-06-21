@@ -1,9 +1,10 @@
-import styles from './EmploeeWorkerCard.module.scss';
-import useStartStopStream from '@/logic/hooks/useStartStopStream';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import { useSelector } from 'react-redux';
-import { useAccount } from 'wagmi';
-import { Button, Notif, Company, Loader, User } from '@/components';
+import styles from "./EmploeeWorkerCard.module.scss";
+import useStartStopStream from "@/logic/hooks/useStartStopStream";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
+import { Button, Notif, Company, Loader, User } from "@/components";
+import { substrAddress } from "@/logic/functions/utils";
 
 export const EmploeeWorkerCard = () => {
   const { address: walletAddress } = useAccount();
@@ -27,13 +28,13 @@ export const EmploeeWorkerCard = () => {
       {employee ? (
         <>
           <h2 className={styles.title}>
-            {isActive ? 'You are working now!' : 'You are chilling now!'}{' '}
+            {isActive ? "You are working now!" : "You are chilling now!"}{" "}
           </h2>
           <ul className={styles.list}>
             <li>
               <User />
               <div>
-                <h3>{`${employee.who.substr(0, 5)}...${employee.who.substr(-4)}`}</h3>
+                <h3>{substrAddress(employee.who)}</h3>
                 <p>
                   {employee.rate} {symbolToken}
                 </p>
@@ -43,13 +44,17 @@ export const EmploeeWorkerCard = () => {
               <p>гифка</p>
             </li>
             <li>
-              <h3>{`${address.substr(0, 5)}...${address.substr(-4)}`}</h3>
+              <h3>{substrAddress(address)}</h3>
               <Company />
             </li>
           </ul>
           {isActive && (
             <div className={styles.counter}>
-              <Button onClick={handleWithdrawMoneyEmployee} loader={isLoading} type="main">
+              <Button
+                onClick={handleWithdrawMoneyEmployee}
+                loader={isLoading}
+                type="main"
+              >
                 Withdraw money
               </Button>
               <span>

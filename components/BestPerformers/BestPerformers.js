@@ -1,8 +1,9 @@
-'use client';
-import { useSelector } from 'react-redux';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import styles from './BestPerformers.module.scss';
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+"use client";
+import { useSelector } from "react-redux";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import styles from "./BestPerformers.module.scss";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { substrAddress } from "@/logic/functions/utils";
 
 export const BestPerformers = () => {
   const { arrEmployee } = useSelector(contractSelector);
@@ -30,10 +31,7 @@ export const BestPerformers = () => {
                   diameter={24}
                   seed={jsNumberForAddress(arrEmployee.who)}
                 />
-                {`${arrEmployee.who.substring(
-                  0,
-                  5
-                )}...${arrEmployee.who.substring(arrEmployee.who.length - 4)}`}
+                {substrAddress(arrEmployee.who)}
               </li>
               <li>{arrEmployee.rate}</li>
               <li>xxx</li>
