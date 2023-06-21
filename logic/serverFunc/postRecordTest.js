@@ -7,8 +7,8 @@ const postRecordTest = async (name, address) => {
     },
   };
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/data`,
+    await fetch(
+      `https://new-flowary.vercel.app/api/data`,
 
       requestOptions
     );
