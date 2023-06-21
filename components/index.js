@@ -24,6 +24,7 @@ export { default as Company } from './Svg/internal/company.svg';
 export { default as NewTask } from './Svg/outsource/newtask.svg';
 export { default as Freelancer } from './Svg/outsource/user.svg';
 export { default as Close } from './Svg/close.svg';
+export { default as Hamburger } from './Svg/hamburger.svg';
 
 export * from './TheHeader/TheHeader';
 export * from './TheSidebar/TheSidebar';
@@ -56,3 +57,5 @@ export * from './OutsourseWorkerCard/OutsourceWorkerCard';
 
 export * from './ModalDeposit/ModalDeposit';
 export * from './StreamHistory/StreamHistory';
+export * from './StreamHistory/InternalHistory';
+export * from './StreamHistory/OutsourceHistory';

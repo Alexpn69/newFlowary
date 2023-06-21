@@ -33,7 +33,9 @@ export const EmploeeWorkerCard = () => {
             <li>
               <User />
               <div>
-                <h3>{`${employee.who.substr(0, 5)}...${employee.who.substr(-4)}`}</h3>
+                <h3>
+                  {employee.who.substr(0, 5)}...{employee.who.substr(-4)}
+                </h3>
                 <p>
                   {employee.rate} {symbolToken}
                 </p>
@@ -43,7 +45,9 @@ export const EmploeeWorkerCard = () => {
               <p>гифка</p>
             </li>
             <li>
-              <h3>{`${address.substr(0, 5)}...${address.substr(-4)}`}</h3>
+              <h3>
+                {address.substr(0, 5)}...{address.substr(-4)}
+              </h3>
               <Company />
             </li>
           </ul>

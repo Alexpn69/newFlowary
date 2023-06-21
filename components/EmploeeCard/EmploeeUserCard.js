@@ -50,8 +50,12 @@ export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
         <li>
           <Jazzicon diameter={48} seed={jsNumberForAddress(who)} />
           <div className={styles.user}>
-            <h3>{`${who.substr(0, 5)}...${who.substr(-4)}`}</h3>
-            <h4>{`${rate} ${symbolToken}`}</h4>
+            <h3>
+              {who.substr(0, 5)}...{who.substr(-4)}
+            </h3>
+            <h4>
+              {rate} {symbolToken}
+            </h4>
           </div>
         </li>
         <li>

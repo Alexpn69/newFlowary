@@ -26,7 +26,7 @@ export const Notif = ({ active, children }) => {
         className={clsx(styles.box, active !== 'Success!' && styles.red)}
         onClick={(e) => e.stopPropagation()}
       >
-        <Button className={clsx(styles.btn)} onClick={() => setIsVisible(false)}>
+        <Button className={clsx(styles.btn)} onClick={() => setIsVisible(false)} type="svg">
           <Close className={clsx(styles.svg)} />
         </Button>
         {children}

@@ -108,7 +108,9 @@
   height: 25px;
   animation: spin89345 1s linear infinite;
 }
-
+.svg {
+  padding: 5px;
+}
 @keyframes spin89345 {
   0% {
     transform: rotate(0deg);

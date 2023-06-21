@@ -21,7 +21,9 @@ export const OutsourceTaskCard = ({
     <ul className={styles.container}>
       <li>
         <Jazzicon diameter={48} seed={jsNumberForAddress(who)} />
-        <h3>{`${who.substr(0, 5)}...${who.substr(-4)}`}</h3>
+        <h3>
+          {who.substr(0, 5)}...{who.substr(-4)}
+        </h3>
       </li>
       <li>{taskName}</li>
       <li>

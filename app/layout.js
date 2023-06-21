@@ -1,23 +1,18 @@
 'use client';
 import clsx from 'clsx';
 import './globals.scss';
-
 import styles from './layout.module.scss';
-import { TheSidebar, TheHeader } from '@/components';
+import { TheSidebar, TheHeader, Hamburger, Button } from '@/components';
 import { usePathname } from 'next/navigation';
-
 import '@rainbow-me/rainbowkit/styles.css';
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  lightTheme,
-} from '@rainbow-me/rainbowkit';
+import { getDefaultWallets, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '@/store';
+import { useEffect, useState } from 'react';
 
 const metadata = {
   title: 'Flowary',
@@ -43,6 +38,20 @@ const wagmiConfig = createConfig({
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  const [hamburger, setHamburger] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 1250) {
+        setHamburger(false);
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <html lang="en">
       <body>
@@ -58,28 +67,29 @@ export default function RootLayout({ children }) {
                   fontStack: 'system',
                 })}
               >
-                <div className={styles.container}>
-                  {pathname !== '/' && (
-                    <TheSidebar className={styles.sidebar} />
-                  )}
-                  <div
+                <div className={clsx(pathname !== '/' ? styles.container : styles.lendcontainer)}>
+                  <TheSidebar
                     className={clsx(
-                      pathname !== '/' ? styles.wrapper : styles.lendwrapper
+                      pathname !== '/' ? styles.sidebar : styles.lendsidebar,
+                      hamburger && styles.active
                     )}
-                  >
-                    <TheHeader
-                      className={clsx(
-                        pathname !== '/' ? styles.header : styles.lendheader
-                      )}
-                    />
-                    <main
-                      className={clsx(
-                        pathname !== '/' ? styles.main : styles.lendmain
-                      )}
+                    onClick={() => setHamburger(false)}
+                  />
+                  {pathname !== '/' && (
+                    <Button
+                      onClick={() => setHamburger((prev) => !prev)}
+                      className={clsx(styles.hamburger, hamburger && styles.active)}
+                      type="svg"
                     >
-                      {children}
-                    </main>
-                  </div>
+                      <Hamburger />
+                    </Button>
+                  )}
+                  <TheHeader
+                    className={clsx(pathname !== '/' ? styles.header : styles.lendheader)}
+                  />
+                  <main className={clsx(pathname !== '/' ? styles.main : styles.lendmain)}>
+                    {children}
+                  </main>
                 </div>
               </RainbowKitProvider>
             </WagmiConfig>

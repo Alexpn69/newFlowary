@@ -13,9 +13,9 @@ export const BestPerformers = () => {
       : [];
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2 className={styles.subtitle}>Bestperformers</h2>
-      <div className={styles.container}>
+      <ul className={styles.container}>
         <ul className={styles.top}>
           <li>Address</li>
           <li>Rate</li>
@@ -26,23 +26,17 @@ export const BestPerformers = () => {
             <ul className={styles.grid} key={arrEmployee.who}>
               <li>
                 <span>{index + 1}</span>
-                <Jazzicon
-                  diameter={24}
-                  seed={jsNumberForAddress(arrEmployee.who)}
-                />
-                {`${arrEmployee.who.substring(
-                  0,
-                  5
-                )}...${arrEmployee.who.substring(arrEmployee.who.length - 4)}`}
+                <Jazzicon diameter={24} seed={jsNumberForAddress(arrEmployee.who)} />
+                {arrEmployee.who.substr(0, 5)}...{arrEmployee.who.substr(-4)}
               </li>
               <li>{arrEmployee.rate}</li>
               <li>xxx</li>
             </ul>
           ))
         ) : (
-          <p>Add Employee!</p>
+          <li className={styles.noemployee}>Add Employee!</li>
         )}
-      </div>
+      </ul>
     </div>
   );
 };

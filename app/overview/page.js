@@ -43,7 +43,9 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Company Contract</h3>
-              <p>{`${address.substr(0, 5)}...${address.substr(-4)}`}</p>
+              <p>
+                {address.substr(0, 5)}...{address.substr(-4)}
+              </p>
             </div>
           </div>
           <div className={styles.row}>
@@ -52,7 +54,9 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Owner</h3>
-              <p>{`${owner.substr(0, 5)}...${owner.substr(-4)}`}</p>
+              <p>
+                {owner.substr(0, 5)}...{owner.substr(-4)}
+              </p>
             </div>
           </div>
           <div className={styles.row}>
@@ -61,7 +65,9 @@ export default function Page() {
             </div>
             <div className={styles.text}>
               <h3>Admin</h3>
-              <p>{`${admin.substr(0, 5)}...${admin.substr(-4)}`}</p>
+              <p>
+                {admin.substr(0, 5)}...{admin.substr(-4)}
+              </p>
             </div>
           </div>
         </div>
@@ -82,9 +88,8 @@ export default function Page() {
             <h3>Stream Value</h3>
             <h4>
               <span>
-                {staff
-                  ? `${parseFloat(totalValueOutsource).toFixed(2)} ${symbolToken}`
-                  : `${parseFloat(totalValueStreams).toFixed(2)} ${symbolToken}`}
+                {parseFloat(staff ? totalValueOutsource : totalValueStreams).toFixed(2)}
+                {symbolToken}
               </span>
             </h4>
           </div>

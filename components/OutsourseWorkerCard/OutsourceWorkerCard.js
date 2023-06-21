@@ -24,13 +24,17 @@ export const OutsourceWorkerCard = () => {
           <ul className={styles.list}>
             <li>
               <Freelancer />
-              <h3>{`${employee.who.substr(0, 5)}...${employee.who.substr(-4)}`}</h3>
+              <h3>
+                {employee.who.substr(0, 5)}...{employee.who.substr(-4)}
+              </h3>
             </li>
             <li>
               <p>гифка</p>
             </li>
             <li>
-              <h3>{`${address.substr(0, 5)}...${address.substr(-4)}`}</h3>
+              <h3>
+                {address.substr(0, 5)}...{address.substr(-4)}
+              </h3>
               <Company />
             </li>
           </ul>

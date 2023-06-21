@@ -18,7 +18,7 @@
       grid-template-columns: 1.15fr 1.15fr 1.15fr 0.55fr;
       justify-items: center;
       align-items: center;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 18px;
       color: rgba(28, 31, 55, 0.8);
       border-bottom: 1px solid #dadada;
@@ -45,6 +45,8 @@
   justify-items: center;
   align-items: center;
   padding: 10px 0;
+  color: rgba(28, 31, 55, 0.8);
+  text-align: center;
   > li:first-child {
     display: flex;
     align-items: center;

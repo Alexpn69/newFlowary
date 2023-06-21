@@ -19,6 +19,7 @@ export const Button = ({
         styles.button,
         type && styles[type],
         color && styles[color],
+        color && styles[color],
         disabled && styles.disabled,
         loader && styles.disabled
       )}
