@@ -11,6 +11,7 @@
   gap: 20px;
   max-width: 350px;
   width: 100%;
+  padding-top: 25px;
   .balance {
     background: #ffffff;
     box-shadow: 0px 5px 10px #f1f2fa;
@@ -33,6 +34,7 @@
   }
 }
 .right {
+  padding-top: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -41,7 +43,6 @@
   > .top {
     > .title {
       font-weight: 400;
-      margin-top: 10px;
       font-size: 28px;
       color: #152552;
       margin-bottom: 20px;

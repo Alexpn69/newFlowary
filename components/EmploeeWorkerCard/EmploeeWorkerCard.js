@@ -3,7 +3,7 @@ import useStartStopStream from '@/logic/hooks/useStartStopStream';
 import { contractSelector } from '@/store/reducers/contract/reducer';
 import { useSelector } from 'react-redux';
 import { useAccount } from 'wagmi';
-import { Button, Notif, Company, Loader, User, Gears } from '@/components';
+import { Button, Notif, Company, Loader, User, Gears, SubstrAddress } from '@/components';
 
 export const EmploeeWorkerCard = () => {
   const { address: walletAddress } = useAccount();
@@ -27,14 +27,14 @@ export const EmploeeWorkerCard = () => {
       {employee ? (
         <>
           <h2 className={styles.title}>
-            {isActive ? 'You are working now!' : 'You are chilling now!'}{' '}
+            {isActive ? 'You are working now!' : 'You are chilling now!'}
           </h2>
           <ul className={styles.list}>
             <li>
               <User />
               <div>
                 <h3>
-                  {employee.who.substr(0, 5)}...{employee.who.substr(-4)}
+                  <SubstrAddress address={employee.who} />
                 </h3>
                 <p>
                   {employee.rate} {symbolToken}
@@ -42,11 +42,11 @@ export const EmploeeWorkerCard = () => {
               </div>
             </li>
             <li>
-              <Gears />
+              <Gears type={isActive ? '' : 'paused'} />
             </li>
             <li>
               <h3>
-                {address.substr(0, 5)}...{address.substr(-4)}
+                <SubstrAddress address={address} />
               </h3>
               <Company />
             </li>

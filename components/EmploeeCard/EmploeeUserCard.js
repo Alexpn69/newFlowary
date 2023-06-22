@@ -2,7 +2,16 @@
 import styles from './EmploeeCard.module.scss';
 import { useState } from 'react';
 import useStartStopStream from '@/logic/hooks/useStartStopStream';
-import { Button, Delete, Loader, Modal, ModalSettingsUser, Notif, Setting } from '@/components';
+import {
+  Button,
+  Delete,
+  Loader,
+  Modal,
+  ModalSettingsUser,
+  Notif,
+  Setting,
+  SubstrAddress,
+} from '@/components';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import useDeleteEmployee from '@/logic/hooks/useDeleteEmployee';
 import usePrepareCompanyContract from '@/logic/hooks/usePrepareCompanyContract';
@@ -51,7 +60,7 @@ export const EmploeeUserCard = ({ who, rate, symbolToken }) => {
           <Jazzicon diameter={48} seed={jsNumberForAddress(who)} />
           <div className={styles.user}>
             <h3>
-              {who.substr(0, 5)}...{who.substr(-4)}
+              <SubstrAddress address={who} />
             </h3>
             <h4>
               {rate} {symbolToken}

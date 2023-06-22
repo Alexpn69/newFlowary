@@ -1,5 +1,5 @@
 import styles from './EmploeeCard.module.scss';
-import { Button, Modal, ModalAddNewUser, New, EmploeeUserCard } from '@/components';
+import { Button, Modal, ModalAddNewUser, New, EmploeeUserCard, Gears } from '@/components';
 import { contractSelector } from '@/store/reducers/contract/reducer';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';

@@ -3,6 +3,8 @@ import styles from './StreamHistory.module.scss';
 import dayjs from 'dayjs';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import clsx from 'clsx';
+import { SubstrAddress } from '@/components';
+
 export const OutsourceHistory = ({ outsource, symbolToken }) => {
   const statusOutsource = { 1: 'Waiting for claim', 2: 'Waiting for accept', 3: 'Finished' };
   return (
@@ -26,11 +28,11 @@ export const OutsourceHistory = ({ outsource, symbolToken }) => {
                   <Jazzicon diameter={24} seed={jsNumberForAddress(who)} />
                 </span>
                 <span className={styles.right}>
-                  {who.substr(0, 5)}...{who.substr(-4)}
+                  <SubstrAddress address={who} />
                 </span>
               </li>
               <li className={clsx(styles[`status${status}`])}>{statusOutsource[status]}</li>
-              <li> {taskName}</li>
+              <li className={styles.tasks}> {taskName}</li>
               <li className={styles.earned}>
                 {parseFloat(wage).toFixed(2)} {symbolToken}
               </li>

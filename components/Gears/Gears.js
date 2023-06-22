@@ -1,7 +1,18 @@
 import styles from './Gears.module.css';
 import clsx from 'clsx';
 
-export const Gears = () => {
+export const Gears = ({ type = '' }) => {
+  if (type == 'paused') {
+    return (
+      <div className={clsx(styles.newtonscradle)}>
+        <div className={clsx(styles.newtonscradle__dot)}></div>
+        <div className={clsx(styles.newtonscradle__dot)}></div>
+        <div className={clsx(styles.newtonscradle__dot)}></div>
+        <div className={clsx(styles.newtonscradle__dot)}></div>
+      </div>
+    );
+  }
+
   return (
     <div className={clsx(styles.gearbox)}>
       <div className={clsx(styles.overlay)}></div>

@@ -1,6 +1,6 @@
 'use client';
 import styles from './CompanyInfo.module.scss';
-import { AdminLogo, ContractLogo, OwnerLogo } from '@/components';
+import { AdminLogo, ContractLogo, OwnerLogo, SubstrAddress } from '@/components';
 
 export const CompanyInfo = ({ name, address, owner, admin }) => {
   return (
@@ -13,7 +13,7 @@ export const CompanyInfo = ({ name, address, owner, admin }) => {
         <div className={styles.text}>
           <h3>Company Contract</h3>
           <p>
-            {address.substr(0, 5)}...{address.substr(-4)}
+            <SubstrAddress address={address} />
           </p>
         </div>
       </div>
@@ -24,7 +24,7 @@ export const CompanyInfo = ({ name, address, owner, admin }) => {
         <div className={styles.text}>
           <h3>Owner</h3>
           <p>
-            {owner.substr(0, 5)}...{owner.substr(-4)}
+            <SubstrAddress address={owner} />
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@ export const CompanyInfo = ({ name, address, owner, admin }) => {
         <div className={styles.text}>
           <h3>Admin</h3>
           <p>
-            {admin.substr(0, 5)}...{admin.substr(-4)}
+            <SubstrAddress address={admin} />
           </p>
         </div>
       </div>

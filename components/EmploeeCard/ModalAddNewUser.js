@@ -52,7 +52,7 @@ export const ModalAddNewUser = ({ setActive }) => {
           min="0"
         />
       </div>
-      <input type="submit" value="submit" />
+      <input type="submit" value="Add" />
       <Notif active={notif}>{notif}</Notif>
     </form>
   );

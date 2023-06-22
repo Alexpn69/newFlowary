@@ -3,6 +3,7 @@
   width: 100vw;
   background-color: #f8f9ff;
   padding: 80px 5px 5px 267px;
+  overflow: hidden;
 }
 .header {
   position: fixed;
@@ -22,8 +23,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #1c305a;
@@ -36,6 +36,7 @@
   max-width: 1200px;
   width: 100%;
   display: flex;
+  overflow-y: auto;
   justify-content: space-around;
   gap: 20px;
 }
@@ -73,7 +74,7 @@
   background-position: center;
 }
 .hamburger {
-  position: absolute;
+  position: fixed;
   opacity: 0;
   visibility: hidden;
   left: 20px;
@@ -96,13 +97,12 @@
 
 @media (max-width: 1250px) {
   .sidebar {
-    position: absolute;
+    top: 0;
     left: -262px;
     z-index: 4;
     transition: 0.3s ease-out;
   }
   .active {
-    position: absolute;
     left: 0px;
     transition: 0.3s ease-out;
   }

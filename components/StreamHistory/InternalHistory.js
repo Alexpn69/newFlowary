@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Scan } from '@/components';
+import { Scan, SubstrAddress } from '@/components';
 
 export const InternalHistory = ({ streams, symbolToken }) => {
   console.log(streams);
@@ -32,11 +32,11 @@ export const InternalHistory = ({ streams, symbolToken }) => {
                   <Jazzicon diameter={24} seed={jsNumberForAddress(addr)} />
                 </span>
                 <span className={styles.right}>
-                  {addr.substr(0, 5)}...{addr.substr(-4)}
+                  <SubstrAddress address={addr} />
                 </span>
               </li>
               <li className={clsx(name === 'Active' ? styles.active : styles.finished)}>{name}</li>
-              <li>
+              <li className={styles.hash}>
                 <Link href={txHash ? `https://goerli.etherscan.io/tx/${txHash}` : `./history`}>
                   {txHash?.substr(0, 5)}...{txHash?.substr(-4)}
                 </Link>

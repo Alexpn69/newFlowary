@@ -52,11 +52,25 @@
     align-items: center;
     width: 100%;
     gap: 10px;
+    font-weight: 500;
   }
   > li:nth-child(2) {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 500;
+  }
+  > .status1 {
+    font-weight: 500;
+    color: #1c305a;
+  }
+  > .status2 {
+    font-weight: 600;
+    color: #cf3a59;
+  }
+  > .status3 {
+    font-weight: 600;
+    color: #23af72;
   }
   > li:nth-child(3) {
     width: 100%;
@@ -87,7 +101,7 @@
     }
     > h6 {
       color: #cf3a59;
-      font-weight: 600;
+      font-weight: 500;
     }
   }
 

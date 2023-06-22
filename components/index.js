@@ -34,6 +34,7 @@ export * from './Gears/Gears';
 export * from './Notif/Notif';
 export * from './InputForm/InputForm';
 export * from './AccessDenied/AccessDenied';
+export * from './SubstrAddress/SubstrAddress';
 
 export * from './LendingCard/LendingCard';
 export * from './CardCreate/CardCreate';

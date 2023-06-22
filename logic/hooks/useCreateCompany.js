@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAddress } from "@/store/reducers/contract/reducer";
-import postRecord from "../serverFunc/postRecord";
 import { FACTORY_ABI, FACTORY_ADDRESS } from "@/web3/contractFactory";
-import getRecordByName from "../serverFunc/getRecordByName";
 import getContractSigner from "@/logic/functions/getSignedContract";
+import postRecordTest from "../serverFunc/postRecordTest";
+import getRecordTest from "../serverFunc/getRecordTest";
 
 const useCreateCompany = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,14 +19,13 @@ const useCreateCompany = () => {
         FACTORY_ABI,
         FACTORY_ADDRESS
       );
-      const record = await getRecordByName(name);
+      const record = await getRecordTest(name);
       if (record) {
         setNotif(`Company ${name} already exists. Choose another name`);
       } else {
         const tx = await contractSigner.createCompany(name);
         const response = await tx.wait();
-        await postRecord(name, response.logs[0].address);
-        console.log("add", response.logs[0].address);
+        await postRecordTest(name, response.logs[0].address);
         dispatch(setAddress(response.logs[0].address));
         setNotif("Success!");
         setActiveTab("Set Token");

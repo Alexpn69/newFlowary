@@ -53,6 +53,7 @@
       }
       > .address {
         gap: 5px;
+        font-weight: 500;
         > .left {
           flex: 1;
           display: flex;
@@ -73,7 +74,13 @@
         font-weight: 600;
       }
       > .earned {
-        font-weight: 600;
+        font-weight: 500;
+      }
+      > .tasks {
+        font-weight: 500;
+      }
+      > .hash {
+        font-weight: 500;
       }
       > .status1 {
         font-weight: 600;

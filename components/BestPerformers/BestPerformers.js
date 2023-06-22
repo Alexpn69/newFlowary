@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { contractSelector } from '@/store/reducers/contract/reducer';
 import styles from './BestPerformers.module.scss';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+import { SubstrAddress } from '@/components';
 
 export const BestPerformers = () => {
   const { arrEmployee } = useSelector(contractSelector);
@@ -27,7 +28,9 @@ export const BestPerformers = () => {
               <li>
                 <span>{index + 1}</span>
                 <Jazzicon diameter={24} seed={jsNumberForAddress(arrEmployee.who)} />
-                {arrEmployee.who.substr(0, 5)}...{arrEmployee.who.substr(-4)}
+                <div>
+                  <SubstrAddress address={arrEmployee.who} />
+                </div>
               </li>
               <li>{arrEmployee.rate}</li>
               <li>xxx</li>
