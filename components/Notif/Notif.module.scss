@@ -1,5 +1,5 @@
 .box {
-  background-color: #baf0ba;
+  background-color: #d0f3e3;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 24px;
   padding: 16px;
@@ -22,18 +22,18 @@
   overflow: hidden;
   > .btn {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 5px;
     > .svg {
-      fill: #90b690;
+      fill: #50b98c;
     }
   }
 }
 .red {
-  background-color: #f4d7d7;
+  background-color: #ffe9f5;
   > .btn {
     > .svg {
-      fill: #bba4a4;
+      fill: #cca7bc;
     }
   }
 }

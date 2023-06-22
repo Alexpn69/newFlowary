@@ -1,9 +1,9 @@
 const postRecordTest = async (name, address) => {
   const requestOptions = {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify({ name, address }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
   try {

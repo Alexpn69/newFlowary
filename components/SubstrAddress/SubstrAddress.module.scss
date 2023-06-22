@@ -1,0 +1,28 @@
+.substrAddress {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  user-select: none;
+  &:active {
+    scale: (0.95);
+  }
+}
+
+.notification {
+  position: absolute;
+  top: -125%;
+  left: 105%;
+  padding: 8px;
+  background: #eff2f6;
+  color: rgba(28, 31, 55, 0.8);
+  border-radius: 15px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.copied .notification {
+  opacity: 1;
+}

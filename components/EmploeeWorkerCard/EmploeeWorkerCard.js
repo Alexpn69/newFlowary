@@ -1,10 +1,9 @@
-import styles from "./EmploeeWorkerCard.module.scss";
-import useStartStopStream from "@/logic/hooks/useStartStopStream";
-import { contractSelector } from "@/store/reducers/contract/reducer";
-import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
-import { Button, Notif, Company, Loader, User } from "@/components";
-import { substrAddress } from "@/logic/functions/utils";
+import styles from './EmploeeWorkerCard.module.scss';
+import useStartStopStream from '@/logic/hooks/useStartStopStream';
+import { contractSelector } from '@/store/reducers/contract/reducer';
+import { useSelector } from 'react-redux';
+import { useAccount } from 'wagmi';
+import { Button, Notif, Company, Loader, User, Gears, SubstrAddress } from '@/components';
 
 export const EmploeeWorkerCard = () => {
   const { address: walletAddress } = useAccount();
@@ -28,33 +27,33 @@ export const EmploeeWorkerCard = () => {
       {employee ? (
         <>
           <h2 className={styles.title}>
-            {isActive ? "You are working now!" : "You are chilling now!"}{" "}
+            {isActive ? 'You are working now!' : 'You are chilling now!'}
           </h2>
           <ul className={styles.list}>
             <li>
               <User />
               <div>
-                <h3>{substrAddress(employee.who)}</h3>
+                <h3>
+                  <SubstrAddress address={employee.who} />
+                </h3>
                 <p>
                   {employee.rate} {symbolToken}
                 </p>
               </div>
             </li>
             <li>
-              <p>гифка</p>
+              <Gears type={isActive ? '' : 'paused'} />
             </li>
             <li>
-              <h3>{substrAddress(address)}</h3>
+              <h3>
+                <SubstrAddress address={address} />
+              </h3>
               <Company />
             </li>
           </ul>
-          {isActive && (
+          {isActive ? (
             <div className={styles.counter}>
-              <Button
-                onClick={handleWithdrawMoneyEmployee}
-                loader={isLoading}
-                type="main"
-              >
+              <Button onClick={handleWithdrawMoneyEmployee} loader={isLoading} type="main">
                 Withdraw money
               </Button>
               <span>
@@ -64,6 +63,10 @@ export const EmploeeWorkerCard = () => {
                 <h4 className={styles.right}>{symbolToken}</h4>
               </span>
               <h5>Stream started : timestamp</h5>
+            </div>
+          ) : (
+            <div className={styles.counter}>
+              <h5>Stream ended : timestamp</h5>
             </div>
           )}
         </>

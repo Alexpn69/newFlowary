@@ -1,5 +1,5 @@
 import styles from './EmploeeCard.module.scss';
-import { Button, Modal, ModalAddNewUser, New, EmploeeUserCard } from '@/components';
+import { Button, Modal, ModalAddNewUser, New, EmploeeUserCard, Gears } from '@/components';
 import { contractSelector } from '@/store/reducers/contract/reducer';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -19,7 +19,6 @@ export const EmploeeCard = () => {
           <li>Change State</li>
           <li>Amount of stream</li>
         </ul>
-        {}
         {arrEmployee.length > 0 ? (
           arrEmployee.map(({ who, rate }) => (
             <EmploeeUserCard key={who} who={who} rate={rate} symbolToken={symbolToken} />

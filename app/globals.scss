@@ -9,7 +9,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 a,
 a:link,
@@ -91,5 +91,24 @@ legend {
   display: block;
 }
 .swiper-pagination-bullet-active {
-  background: #0c55ff !important;
+  background: #017efa !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f8f9ff;
+}
+
+/* Стилизация ползунка (бегунок) */
+::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 4px;
+}
+
+/* Стилизация ползунка при наведении */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(177, 177, 177);
 }

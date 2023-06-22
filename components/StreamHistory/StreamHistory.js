@@ -1,37 +1,28 @@
-"use client";
-import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
-import { Loader } from "../Loader/Loader";
-import { useState } from "react";
-import { Button } from "../Button/Button";
+'use client';
+import styles from './StreamHistory.module.scss';
+import { useState } from 'react';
+import { Button, ChangeLogo, InternalHistory, OutsourceHistory } from '@/components';
+import { useSelector } from 'react-redux';
+import { contractSelector } from '@/store/reducers/contract/reducer';
 
 export const StreamHistory = ({ streams, outsource }) => {
   const [toggle, setToggle] = useState(true);
+  const { symbolToken } = useSelector(contractSelector);
 
   return (
-    <>
-      <Button onClick={() => setToggle((prev) => !prev)}>
-        {toggle
-          ? "Streams is showing: push to switch to Outsource"
-          : "Outsource is showing: push to switch to Streams"}
-      </Button>
+    <div className={styles.container}>
+      <h3 className={styles.title}>
+        <Button onClick={() => setToggle((prev) => !prev)} className={styles.btn}>
+          <ChangeLogo className={styles.svg} />
+          Swap
+        </Button>
+        {toggle ? 'Internal Stats' : 'Outsource Stats'}
+      </h3>
       {toggle ? (
-        streams.length != 0 ? (
-          streams.map(({ addr, name, earned, startAt, time, txHash }) => (
-            <div key={txHash}>{addr}</div>
-          ))
-        ) : (
-          <div>You dont have history of tx</div>
-        )
-      ) : outsource.length != 0 ? (
-        outsource.map(({ who, taskName, startDate }) => (
-          <div key={startDate}>
-            <div> {who}</div>
-            <div> {taskName}</div>
-          </div>
-        ))
+        <InternalHistory streams={streams} symbolToken={symbolToken} />
       ) : (
-        <div>You dont have history of tx</div>
+        <OutsourceHistory outsource={outsource} symbolToken={symbolToken} />
       )}
-    </>
+    </div>
   );
 };

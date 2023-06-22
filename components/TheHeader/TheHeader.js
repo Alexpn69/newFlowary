@@ -1,14 +1,14 @@
-"use client";
-import Link from "next/link";
-import styles from "./TheHeader.module.scss";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { useState } from "react";
-import { contractSelector } from "@/store/reducers/contract/reducer";
-import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
-import useRole from "@/logic/hooks/useRole";
+'use client';
+import Link from 'next/link';
+import styles from './TheHeader.module.scss';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
+import { useState } from 'react';
+import { contractSelector } from '@/store/reducers/contract/reducer';
+import { useSelector } from 'react-redux';
+import { useAccount } from 'wagmi';
+import useRole from '@/logic/hooks/useRole';
 
 export const TheHeader = ({ ...props }) => {
   const pathname = usePathname();
@@ -25,12 +25,12 @@ export const TheHeader = ({ ...props }) => {
   useRole();
   return (
     <header {...props}>
-      {/* {pathname === "/" && (
-        <Link href="/overview" className={styles.logo}>
+      {pathname === '/' && (
+        <Link href="/" className={styles.logo}>
           <h1>Flowary</h1>
         </Link>
-      )} */}
-      {pathname !== "/" && (
+      )}
+      {pathname !== '/' && (
         <>
           {walletAddress ? (
             <div
