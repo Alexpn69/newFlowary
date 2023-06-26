@@ -15,16 +15,6 @@ export const ModalSettingsUser = ({ setActive, who }) => {
   const { contractCompany, signedCompanyContract } =
     usePrepareCompanyContract();
 
-  const handleNewRate = async (rate) => {
-    console.log("???", rate);
-
-    try {
-      handleRateChange(rate);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const {
     handleRateChange,
     isLoading: isRateChangeLoading,
@@ -32,7 +22,6 @@ export const ModalSettingsUser = ({ setActive, who }) => {
     setNotif: setRateChangeNotif,
   } = useRateChange(
     signedCompanyContract,
-    // newRateRef,
     who,
     contractCompany,
     decimalsToken,
@@ -48,7 +37,7 @@ export const ModalSettingsUser = ({ setActive, who }) => {
         label="Rate"
         placeholder="Enter new value"
         button="Change"
-        handler={handleNewRate}
+        handler={handleRateChange}
         isLoading={isRateChangeLoading}
       />
       <Notif active={rateChangeNotif}>{rateChangeNotif}</Notif>

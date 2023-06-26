@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const useRateChange = (
   signedCompanyContract,
-  // newRateRef,
   who,
   contractCompany,
   decimalsToken,
@@ -18,10 +17,7 @@ const useRateChange = (
     try {
       setNotif("");
       setIsLoading(true);
-      const newRate = (
-        (newRateRef.current.value / 60 / 60) *
-        10 ** decimalsToken
-      ).toFixed(0);
+      const newRate = ((newRateRef / 60 / 60) * 10 ** decimalsToken).toFixed(0);
       const changeRate = await signedCompanyContract.modifyRate(who, newRate);
       await changeRate.wait();
       const amountEmployee = (
