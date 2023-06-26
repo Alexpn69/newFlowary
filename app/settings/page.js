@@ -1,15 +1,24 @@
-'use client';
-import { Button, InputForm, AccessDenied, Notif, Loader, Modal, ModalDeposit } from '@/components';
-import styles from './page.module.scss';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import { useSelector } from 'react-redux';
-import { useAccount } from 'wagmi';
-import useSettingsActions from '@/logic/hooks/useSettingsActions';
-import { useState } from 'react';
-import useLoadWithdraw from '@/logic/hooks/useLoadWithdraw';
+"use client";
+import {
+  Button,
+  InputForm,
+  AccessDenied,
+  Notif,
+  Loader,
+  Modal,
+  ModalDeposit,
+} from "@/components";
+import styles from "./page.module.scss";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
+import useSettingsActions from "@/logic/hooks/useSettingsActions";
+import { useState } from "react";
+import useLoadWithdraw from "@/logic/hooks/useLoadWithdraw";
 
 export default function Settings() {
-  const { address, owner, admin, role, token, liquidation, hl } = useSelector(contractSelector);
+  const { address, owner, admin, role, liquidation, hl } =
+    useSelector(contractSelector);
   const { address: walletAddress } = useAccount();
   const {
     handleSetOwner,
@@ -23,16 +32,20 @@ export default function Settings() {
     notif,
   } = useSettingsActions();
 
-  const { notif: notifWithdraw, isLoadingWithdraw, handleWithdrawMoney } = useLoadWithdraw();
+  const {
+    notif: notifWithdraw,
+    isLoadingWithdraw,
+    handleWithdrawMoney,
+  } = useLoadWithdraw();
 
   const [active, setActive] = useState(false);
 
-  if (!walletAddress && role !== 'Spectator') {
+  if (!walletAddress && role !== "Spectator") {
     return <AccessDenied type="wallet" />;
   } else if (
-    role === 'Owner' ||
-    role === 'Admin' ||
-    address === '0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a'
+    role === "Owner" ||
+    role === "Admin" ||
+    address === "0x3598f3a5A8070340Fde9E9cEcaF6F1F0129b323a"
   ) {
     return (
       <div className={styles.wrapper}>
@@ -98,7 +111,16 @@ export default function Settings() {
         </div>
         <div className={styles.liquid}>
           <h3>Liquidation</h3>
-          <h4>Happened if smart contract went bankrupt, and cant pay wages</h4>
+          {liquidation ? (
+            <h4>
+              Your Company has liquidation status, to resolve this case - repay
+              the amount of your total debt
+            </h4>
+          ) : (
+            <h4>
+              Happened if smart contract went bankrupt, and cant pay wages
+            </h4>
+          )}
           <p>Status : {String(liquidation)}</p>
         </div>
         <Notif active={notif}>{notif}</Notif>

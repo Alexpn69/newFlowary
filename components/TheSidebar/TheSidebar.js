@@ -1,8 +1,8 @@
-'use client';
-import Link from 'next/link';
-import styles from './TheSidebar.module.scss';
-import clsx from 'clsx';
-import { usePathname, useRouter } from 'next/navigation';
+"use client";
+import Link from "next/link";
+import styles from "./TheSidebar.module.scss";
+import clsx from "clsx";
+import { usePathname, useRouter } from "next/navigation";
 import {
   InputForm,
   Change,
@@ -16,10 +16,10 @@ import {
   Settings,
   Button,
   Notif,
-} from '@/components';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useConnectCompany } from '@/logic/hooks/useConnectCompany';
+} from "@/components";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useConnectCompany } from "@/logic/hooks/useConnectCompany";
 
 export const TheSidebar = ({ ...props }) => {
   const [modalActive, setModalActive] = useState(false);
@@ -49,10 +49,16 @@ export const TheSidebar = ({ ...props }) => {
           <li>
             <Link
               href="./overview"
-              className={clsx(styles.link, pathname.startsWith('/overview') && styles.active)}
+              className={clsx(
+                styles.link,
+                pathname.startsWith("/overview") && styles.active
+              )}
             >
               <Overview
-                className={clsx(styles.svg, pathname.startsWith('/overview') && styles.active)}
+                className={clsx(
+                  styles.svg,
+                  pathname.startsWith("/overview") && styles.active
+                )}
               />
               Overview
             </Link>
@@ -60,10 +66,16 @@ export const TheSidebar = ({ ...props }) => {
           <li>
             <Link
               href="./internalstaff"
-              className={clsx(styles.link, pathname.startsWith('/internalstaff') && styles.active)}
+              className={clsx(
+                styles.link,
+                pathname.startsWith("/internalstaff") && styles.active
+              )}
             >
               <Internal
-                className={clsx(styles.svg, pathname.startsWith('/internalstaff') && styles.active)}
+                className={clsx(
+                  styles.svg,
+                  pathname.startsWith("/internalstaff") && styles.active
+                )}
               />
               Internal Staff
             </Link>
@@ -73,13 +85,13 @@ export const TheSidebar = ({ ...props }) => {
               href="./outsourcedworkers"
               className={clsx(
                 styles.link,
-                pathname.startsWith('/outsourcedworkers') && styles.active
+                pathname.startsWith("/outsourcedworkers") && styles.active
               )}
             >
               <Outsource
                 className={clsx(
                   styles.svg,
-                  pathname.startsWith('/outsourcedworkers') && styles.active
+                  pathname.startsWith("/outsourcedworkers") && styles.active
                 )}
               />
               Outsourced Workers
@@ -88,10 +100,16 @@ export const TheSidebar = ({ ...props }) => {
           <li>
             <Link
               href="./history"
-              className={clsx(styles.link, pathname.startsWith('/history') && styles.active)}
+              className={clsx(
+                styles.link,
+                pathname.startsWith("/history") && styles.active
+              )}
             >
               <History
-                className={clsx(styles.svg, pathname.startsWith('/history') && styles.active)}
+                className={clsx(
+                  styles.svg,
+                  pathname.startsWith("/history") && styles.active
+                )}
               />
               History
             </Link>
@@ -99,10 +117,16 @@ export const TheSidebar = ({ ...props }) => {
           <li>
             <Link
               href="./settings"
-              className={clsx(styles.link, pathname.startsWith('/settings') && styles.active)}
+              className={clsx(
+                styles.link,
+                pathname.startsWith("/settings") && styles.active
+              )}
             >
               <Settings
-                className={clsx(styles.svg, pathname.startsWith('/settings') && styles.active)}
+                className={clsx(
+                  styles.svg,
+                  pathname.startsWith("/settings") && styles.active
+                )}
               />
               Settings
             </Link>
@@ -154,7 +178,11 @@ export const TheSidebar = ({ ...props }) => {
         />
       </Modal>
       <Modal active={modalActive} setActive={setModalActive}>
-        <Link onClick={() => setModalActive((prev) => !prev)} href="/" className={styles.btns}>
+        <Link
+          onClick={() => setModalActive((prev) => !prev)}
+          href="/"
+          className={styles.btns}
+        >
           <span>Really Close?</span>
         </Link>
       </Modal>

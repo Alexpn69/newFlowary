@@ -1,9 +1,10 @@
-'use client';
-import { useSelector } from 'react-redux';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import styles from './BestPerformers.module.scss';
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
-import { SubstrAddress } from '@/components';
+"use client";
+import { useSelector } from "react-redux";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import styles from "./BestPerformers.module.scss";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { SubstrAddress } from "@/components";
+import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
 
 export const BestPerformers = () => {
   const { arrEmployee } = useSelector(contractSelector);
@@ -20,14 +21,17 @@ export const BestPerformers = () => {
         <ul className={styles.top}>
           <li>Address</li>
           <li>Rate</li>
-          <li>Total Value</li>
+          <li>Total # of streams</li>
         </ul>
         {sortedEmployees.length > 0 ? (
           sortedEmployees.map((arrEmployee, index) => (
             <ul className={styles.grid} key={arrEmployee.who}>
               <li>
                 <span>{index + 1}</span>
-                <Jazzicon diameter={24} seed={jsNumberForAddress(arrEmployee.who)} />
+                <Jazzicon
+                  diameter={24}
+                  seed={jsNumberForAddress(arrEmployee.who)}
+                />
                 <div>
                   <SubstrAddress address={arrEmployee.who} />
                 </div>

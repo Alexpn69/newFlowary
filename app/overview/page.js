@@ -1,21 +1,37 @@
-'use client';
-import styles from './page.module.scss';
-import { contractSelector } from '@/store/reducers/contract/reducer';
-import { useSelector } from 'react-redux';
-import { sumValuesByKey } from '@/logic/functions/utils';
-import useGetAllLogs from '@/logic/hooks/useGetAllLogs';
-import { Slider, BestPerformers, Loader, CompanyInfo, StaffStats } from '@/components';
+"use client";
+import styles from "./page.module.scss";
+import { contractSelector } from "@/store/reducers/contract/reducer";
+import { useSelector } from "react-redux";
+import { sumValuesByKey } from "@/logic/functions/utils";
+import useGetAllLogs from "@/logic/hooks/useGetAllLogs";
+import {
+  Slider,
+  BestPerformers,
+  Loader,
+  CompanyInfo,
+  StaffStats,
+} from "@/components";
 
 export default function Page() {
-  const { name, role, address, owner, admin, balance, arrOutsource, arrEmployee, symbolToken } =
-    useSelector(contractSelector);
+  const {
+    name,
+    role,
+    address,
+    owner,
+    admin,
+    balance,
+    arrOutsource,
+    arrEmployee,
+    symbolToken,
+    liquidation,
+  } = useSelector(contractSelector);
   const { arrayBlock, isLoading } = useGetAllLogs();
 
   const totalValueStreams = sumValuesByKey(
-    arrayBlock.filter(({ name }) => name === 'Finished'),
-    'earned'
+    arrayBlock.filter(({ name }) => name === "Finished"),
+    "earned"
   );
-  const totalValueOutsource = sumValuesByKey(arrOutsource, 'wage');
+  const totalValueOutsource = sumValuesByKey(arrOutsource, "wage");
 
   if (isLoading) {
     return (
@@ -28,9 +44,18 @@ export default function Page() {
   return (
     <>
       <div className={styles.left}>
-        <CompanyInfo name={name} address={address} owner={owner} admin={admin} />
+        <CompanyInfo
+          name={name}
+          address={address}
+          owner={owner}
+          admin={admin}
+        />
         <div className={styles.balance}>
-          <h2>Total balance</h2>
+          {liquidation ? (
+            <h2>Your company has liquidation status</h2>
+          ) : (
+            <h2>Total balance</h2>
+          )}
           <h3>
             {parseFloat(balance).toFixed(2)} {symbolToken}
           </h3>

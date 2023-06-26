@@ -1,5 +1,5 @@
-import { ethers } from 'ethers';
-import defaultProvider from '../../web3/defaultProvider';
+import { ethers } from "ethers";
+import defaultProvider from "../../web3/defaultProvider";
 
 import {
   setArrOutsource,
@@ -7,9 +7,9 @@ import {
   setSymbolToken,
   setContractInfo,
   setAddress,
-} from '../../store/reducers/contract/reducer';
-import { CONTRACT_INSTANCE_ABI } from '@/web3/contractInstanceAbi';
-import { TOKEN_ABI } from '@/web3/tokenAbi';
+} from "../../store/reducers/contract/reducer";
+import { CONTRACT_INSTANCE_ABI } from "@/web3/contractInstanceAbi";
+import { TOKEN_ABI } from "@/web3/tokenAbi";
 
 const connectContract = async (address, dispatch) => {
   if (!address) return;
@@ -27,12 +27,22 @@ const connectContract = async (address, dispatch) => {
     const token = await contract.token();
     const decimalsToken = (await contract.getDecimals()).toNumber();
     const hl = (await contract.tokenLimitMaxHoursPerPerson()).toNumber();
-    const contractBalance = await contract.currentBalanceContract();
-    const balance = Number(
-      ethers.utils.formatUnits(contractBalance, decimalsToken)
-    ).toFixed(2);
     const amountEmployee = (await contract.amountEmployee()).toNumber();
     const liquidation = await contract.liqudation();
+    let balance;
+    if (liquidation === false) {
+      let contractBalance = await contract.currentBalanceContract();
+      balance = Number(
+        ethers.utils.formatUnits(contractBalance, decimalsToken)
+      ).toFixed(2);
+    } else {
+      let contractBalance = await contract._totalDebt();
+      balance =
+        "-" +
+        Number(
+          ethers.utils.formatUnits(contractBalance, decimalsToken)
+        ).toFixed(2);
+    }
 
     dispatch(
       setContractInfo({

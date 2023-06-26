@@ -1,9 +1,9 @@
-import { ethers } from 'ethers';
-import { useState } from 'react';
+import { ethers } from "ethers";
+import { useState } from "react";
 
 const useRateChange = (
   signedCompanyContract,
-  newRateRef,
+  // newRateRef,
   who,
   contractCompany,
   decimalsToken,
@@ -12,16 +12,21 @@ const useRateChange = (
   setActive
 ) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [notif, setNotif] = useState('');
+  const [notif, setNotif] = useState("");
 
-  const handleRateChange = async () => {
+  const handleRateChange = async (newRateRef) => {
     try {
-      setNotif('');
+      setNotif("");
       setIsLoading(true);
-      const newRate = ((newRateRef.current.value / 60 / 60) * 10 ** decimalsToken).toFixed(0);
+      const newRate = (
+        (newRateRef.current.value / 60 / 60) *
+        10 ** decimalsToken
+      ).toFixed(0);
       const changeRate = await signedCompanyContract.modifyRate(who, newRate);
       await changeRate.wait();
-      const amountEmployee = (await contractCompany.amountEmployee()).toNumber();
+      const amountEmployee = (
+        await contractCompany.amountEmployee()
+      ).toNumber();
       // Refresh array of employees
       let employeeArr = [];
       for (let i = 0; i < amountEmployee; i++) {
@@ -40,11 +45,11 @@ const useRateChange = (
       dispatch(setArrEmployee(employeeArr));
 
       // Update state or dispatch actions with the new employee array or any other necessary data
-      setNotif('Success!');
+      setNotif("Success!");
       setActive(false);
     } catch (error) {
-      console.error('An error occurred:', error);
-      setNotif('An error occurred!');
+      console.error("An error occurred:", error);
+      setNotif("An error occurred!");
     } finally {
       setIsLoading(false);
     }
