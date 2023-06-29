@@ -6,7 +6,7 @@ import { Button, LendingCard } from "@/components";
 import { titles } from "@/constants/lendingTitle";
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <>
