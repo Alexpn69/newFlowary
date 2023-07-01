@@ -8,8 +8,8 @@ const postRecordTest = async (name, address) => {
   };
   try {
     await fetch(
-      // `https://new-flowary.vercel.app/api/data`,
-      `http://localhost:3000/api/data`,
+      `https://new-flowary.vercel.app/api/data`,
+      // `http://localhost:3000/api/data`,
       requestOptions
     );
   } catch (error) {
